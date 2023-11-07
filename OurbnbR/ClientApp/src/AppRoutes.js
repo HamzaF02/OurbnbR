@@ -9,6 +9,10 @@ const AppRoutes = [
     element: <Home />
   },
   {
+    path: '/counter',
+    element: <Counter />
+  },
+  {
     path: '/fetch-data',
     element: <FetchData />
   }, {
