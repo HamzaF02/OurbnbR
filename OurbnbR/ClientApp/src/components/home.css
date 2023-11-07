@@ -1,0 +1,69 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.Front {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 300px;
+    width: 50%;
+    font-size: 20px;
+    position: relative;
+    z-index: 3;
+}
+
+#divBack {
+    background-image: url("/public/images/Villa.jpg");
+    object-position: 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 700px;
+    Background-position: Center;
+    background-color: black;
+    border-radius: 20px;
+    box-shadow: 0 30px 40px rgba(0,0,0,.1);
+    position: relative;
+    margin-top: -450px;
+}
+
+
+
+#carouselImages {
+    margin-top: 20px;
+    border-radius: 20px;
+    margin-bottom: 100px;
+}
+
+.carpic {
+    background-size: cover;
+    height: 500px;
+    border-radius: 20px;
+}
+
+#txt {
+    font-size: 20px;
+    margin-top: 20px;
+    line-height: 35px;
+}
+
+.txtbox {
+    background-image: linear-gradient(127deg,#bfdbfe 10%, #06b6d4 );
+    padding: 30px;
+    border-radius: 20px;
+    height: 500px;
+    margin-top: 20px;
+}
+
+.carousel-caption {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+    border-radius: 20px;
+    font-weight: bold;
+    height: 130px;
+}
