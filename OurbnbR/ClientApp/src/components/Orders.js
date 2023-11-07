@@ -33,7 +33,8 @@ export class Orders extends Component {
                           </tr>
                       </thead>
                       <tbody>
-                          {Orders.map(item => (
+                          {/*
+                              {Orders.map(item => (
                               <tr key={item.OrderId}>
                                   <td>{item.OrderId}</td>
                                   <td>{item.From}</td>
@@ -42,7 +43,7 @@ export class Orders extends Component {
                                   <td>{`${item.Customer.FirstName} ${item.Customer.LastName}`}</td>
                                   <td>{item.Rental.Name}</td>
                                   <td>{item.TotalPrice}</td>
-                                  <td>
+                                  <td> 
                                       {/*{
                                           item.Customer.IdentityId === user.id && (
                                               <div>
@@ -50,10 +51,11 @@ export class Orders extends Component {
                                                   <button className="btn btn-danger" onClick={() => onOrderDelete(item.OrderId)}>Delete</button>
                                               </div>
                                           )
-                                      }*/}
+                                      }
                                   </td>
                               </tr>
                           ))}
+                          */}
                       </tbody>
                   </table>
               </div>
