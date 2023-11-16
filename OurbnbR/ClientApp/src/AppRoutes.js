@@ -1,4 +1,4 @@
-import { FetchData } from "./components/FetchData";
+import { Details } from "./components/Details";
 import { Home } from "./components/Home";
 import { Orders } from "./components/Orders";
 import { Rental } from "./components/Rental";
@@ -12,13 +12,15 @@ const AppRoutes = [
         path: '/orders',
         element: <Orders/>
     },
-  {
-    path: '/fetch-data',
-    element: <FetchData />
-  }, {
-    path: '/rental',
-    element: <Rental />
-  }
+    
+    {
+        path: '/rental',
+        element: <Rental />
+    },
+    {
+        path: '/details/:id',
+        element: <Details />
+    }
 ];
 
 export default AppRoutes;

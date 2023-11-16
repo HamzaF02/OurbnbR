@@ -1,57 +1,63 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import './orders.css';
-export class Orders extends Component {
-  static displayName = Orders.name;
+export function Orders() {
+    const [orders, setOrders] = useState();
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        getOrders()
+    }, []);
 
 
+    async function getOrders() {
+        const response = await fetch('api/order/');
+        const data = await response.json();
+        setOrders(data);
+        setLoading(false);
+    }
 
-  render() {
-      return (
-          <div>
-              <div style={{ overflowX: 'auto' }}>
-                  <table className="table table-striped table-dark" style={{ marginTop: '30px', width: '100%', borderCollapse: 'collapse' }}>
-                      <thead>
-                          <tr>
-                              <th scope="col">Order #</th>
-                              <th scope="col">From</th>
-                              <th scope="col">To</th>
-                              <th scope="col">Rating</th>
-                              <th scope="col">Customer</th>
-                              <th scope="col">Rental</th>
-                              <th scope="col">Total Price</th>
-                              <th scope="col">Actions</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          {/*
-                              {Orders.map(item => (
-                              <tr key={item.OrderId}>
-                                  <td>{item.OrderId}</td>
-                                  <td>{item.From}</td>
-                                  <td>{item.To}</td>
-                                  <td>{item.Rating}</td>
-                                  <td>{`${item.Customer.FirstName} ${item.Customer.LastName}`}</td>
-                                  <td>{item.Rental.Name}</td>
-                                  <td>{item.TotalPrice}</td>
-                                  <td> 
-                                      {/*{
-                                          item.Customer.IdentityId === user.id && (
-                                              <div>
-                                                  <button className="btn btn-info" onClick={() => onOrderUpdate(item.OrderId)}>Update</button>
-                                                  <button className="btn btn-danger" onClick={() => onOrderDelete(item.OrderId)}>Delete</button>
-                                              </div>
-                                          )
-                                      }
-                                  </td>
-                              </tr>
-                          ))}
-                          */}
-                      </tbody>
-                  </table>
-              </div>
-              {/* <button className="btn btn-outline-info info" style={{ marginTop: '30px' }} onClick={() => onGoBackHome()}>Go back Home</button>*/}
-          </div>
-      );
-  }
+
+  
+    return (
+        loading ? <p>loading...</p> :
+        <div>
+            <div style={{ overflowX: 'auto' }}>
+                <table className="table table-striped table-dark" style={{ marginTop: '30px', width: '100%', borderCollapse: 'collapse' }}>
+                    <thead>
+                        <tr>
+                            <th scope="col">Order #</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Rental</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            {orders.map(order => (
+                            <tr key={order.orderId}>
+                                <td>{order.orderId}</td>
+                                <td>{order.from}</td>
+                                <td>{order.to}</td>
+                                <td>{order.rating}</td>
+                                <td>{order.customer.firstName} {order.customer.lastName}</td>
+                                <td>{order.rental.name}</td>
+                                <td>{order.totalPrice}</td>
+                            </tr>
+                        ))}
+                        
+
+
+                    </tbody>
+                </table>
+            </div>
+            {/* <button className="btn btn-outline-info info" style={{ marginTop: '30px' }} onClick={() => onGoBackHome()}>Go back Home</button>*/}
+        </div>
+    );
+  
 }
 

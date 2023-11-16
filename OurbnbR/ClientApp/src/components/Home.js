@@ -7,7 +7,7 @@ export class Home extends Component {
   render() {
       return (
 
-          <>
+          <div>
 
     <div className="container text-center Front">
         <h1 className="display-4">Ourbnb</h1>
@@ -83,7 +83,7 @@ export class Home extends Component {
 
         </div>
        </div>
-    </>
+    </div>
 
     );
   }
