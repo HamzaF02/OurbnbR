@@ -10,7 +10,16 @@
 }
 
 
+.card{
+    margin-top: 20px;
+    padding: 30px;
+    height: 500px;
+    
+}
 
+.card h5{
+    margin-top: 50px;
+}
 
 .nav {
     margin-left: 200px;
@@ -32,7 +41,8 @@
     border: dashed 6px;
     border-color: black;
     background-color: #8baec9;
-    text-align: center
+    text-align: center;
+    height: 400px;
 }
 
 .row {
