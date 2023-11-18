@@ -43,7 +43,11 @@ export function Details() {
                             <h5 className="pull-right">Rating: {rental.rating}</h5>
                         <div >
 
-                            {/*<Link className="btn btn-outline-success info" >Rent out</Link>*/}
+                        <Link className="btn btn-outline-primary info" to={"/rental/update/" + rental.rentalId}>Update</Link>
+                        <Link className="btn btn-outline-danger info" to={"/rental/delete/" + rental.rentalId}>Delete</Link>
+                        <Link className="btn btn-outline-success info" to={"/orders/create/" + rental.rentalId}>Rent out</Link>
+
+
 
 
                             <Link className="btn btn-outline-info info" to="/rental">Back to Grid View</Link>

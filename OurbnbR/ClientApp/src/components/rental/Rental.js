@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
@@ -34,7 +35,7 @@ export function Rental (){
                         
                     })}
                          
-                        <a className="link-dark">
+                    <Link tag={Link} className="link-dark" to="/rental/create">
 
                             <div className="d-flex new justify-content-between mt-1" >
                                 <div className="col addcard" >
@@ -42,7 +43,7 @@ export function Rental (){
                                     <p className="add">Post new Rental!</p>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
           </div>
        );

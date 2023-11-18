@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export function Card({ rental }) {
     return (
-        <Link className="link-dark" to={"/details/" + rental.rentalId}>
+        <Link className="link-dark" to={"/rental/details/" + rental.rentalId}>
             <div className="d-flex justify-content-between mt-1">
                 <div className="col card ">
                     <div>

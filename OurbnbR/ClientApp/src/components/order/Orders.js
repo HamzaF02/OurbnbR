@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './orders.css';
 export function Orders() {
@@ -46,7 +47,11 @@ export function Orders() {
                                 <td>{order.rating}</td>
                                 <td>{order.customer.firstName} {order.customer.lastName}</td>
                                 <td>{order.rental.name}</td>
-                                <td>{order.totalPrice}</td>
+                                    <td>{order.totalPrice}</td>
+                                    <td>
+                                        <Link className="btn btn-outline-primary info" to={"/orders/update/" + order.orderId}>Update</Link>
+                                        <Link className="btn btn-outline-danger info" to={"/orders/delete/" + order.orderId}>Delete</Link>
+                                    </td>
                             </tr>
                         ))}
                         
