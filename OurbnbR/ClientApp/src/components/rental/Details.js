@@ -31,7 +31,7 @@ export function Details() {
             <div>
                 <div className="row row-cols-1 row-cols-lg-2  row-cols-md-1 row-cols-sm-1">
                         <div>
-                            <img alt={rental.name} src={rental.image} className="img-fluid" />
+                            <img alt={rental.name} src={rental.image} className="img-fluid" style={{borderRadius: '20px' }} />
                     </div>
                     <div>
 
@@ -48,9 +48,7 @@ export function Details() {
                         <Link className="btn btn-outline-success info" to={"/orders/create/" + rental.rentalId}>Rent out</Link>
 
 
-
-
-                            <Link className="btn btn-outline-info info" to="/rental">Back to Grid View</Link>
+                        <Link className="btn btn-outline-info info" to="/rental">Back to Grid View</Link>
 
                         </div>
 

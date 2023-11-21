@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "./card.css";
 
 export function Card({ rental }) {
     return (
@@ -9,9 +10,10 @@ export function Card({ rental }) {
                 <div className="col card ">
                     <div>
                         <img src={rental.image} className="card-img-top" alt={rental.name} />
-                        <div>
+
+                        <div className="textbox">
                             <div className="d-flex justify-content-between mt-1">
-                                <h5 className="text-start" >
+                                <h5 className="text-start textdeco">
                                     {rental.name}
                                 </h5>
                             </div>

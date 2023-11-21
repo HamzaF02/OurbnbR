@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 
@@ -62,7 +62,8 @@ export function NewOrder() {
                     <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
 
                 ))}
-                <button type="submit" className="btn btn-primary" value="Post">Submit</button>
+                    <button type="submit"  path="/Home" value="Post">Submit</button>
+                    <Link type="submit" className="btn btn-primary" value="Post"  to="/">Blogs</Link>
             </form>
         </div>
     );
