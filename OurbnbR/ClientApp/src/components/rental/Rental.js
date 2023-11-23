@@ -26,7 +26,7 @@ export function Rental (){
             <div>
                 <h1>List of Rentals</h1>
 
-                <a className="btn btn-light text-dark" asp-action="Table">Table View</a>
+                <button className="btn btn-light text-dark">Table View</button>
 
                     <div className="row col  row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
 
