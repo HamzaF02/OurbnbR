@@ -1,28 +1,13 @@
-﻿import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
 
 export function Rental (){
-    const [rentals, setRentals] = useState();
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        getRentals()
-    }, []);
-
-
-    async function getRentals() {
-        const response = await fetch('api/rentals/');
-        const data = await response.json();
-        setRentals(data);
-        setLoading(false);
-    }
-
+    const rentals = useLoaderData();
 
     return (
-        loading ? <p>loading...</p> :
             <div>
                 <h1>List of Rentals</h1>
 
@@ -49,3 +34,7 @@ export function Rental (){
        );
 }
 
+export async function getRentals() {
+    const response = await fetch('api/rentals/');
+    return await response.json();
+}

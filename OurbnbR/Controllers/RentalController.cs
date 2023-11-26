@@ -145,7 +145,8 @@ namespace OurbnbR.Controllers
                         Price = rental.Price,
                         Image = rental.Image,
                         Location = rental.Location,
-                        Rating = 0
+                        Rating = rental.Rating,
+                        Orders = rental.Orders,
                     };
                 }
                 else

@@ -1,8 +1,8 @@
 import { Details } from "./components/rental/Details";
 import { Home } from "./components/Home";
 import { Orders } from "./components/order/Orders";
-import { Rental } from "./components/rental/Rental";
-import { CreateRental } from "./components/rental/Create";
+import { Rental, getRentals } from "./components/rental/Rental";
+import { CreateRental, rentalCreateAction } from "./components/rental/Create";
 import Update from "./components/rental/Update";
 import { Delete } from "./components/rental/Delete";
 import { NewOrder } from "./components/order/newOrder";
@@ -20,7 +20,7 @@ const AppRoutes = [
     },
     {
         path: '/orders/create/:id',
-        element: <NewOrder />
+        element: <NewOrder />,
     },
     {
         path: '/orders/update/:id',
@@ -32,11 +32,13 @@ const AppRoutes = [
     },
     {
         path: '/rental',
-        element: <Rental />
+        element: <Rental />,
+        loader: getRentals
     },
     {
         path: '/rental/create',
-        element: <CreateRental />
+        element: <CreateRental />,
+        action: rentalCreateAction
     },
     {
         path: '/rental/details/:id',
@@ -44,7 +46,8 @@ const AppRoutes = [
     },
     {
         path: '/rental/update/:id',
-        element: <Update />
+        element: <Update />,
+
     },
     {
         path: '/rental/delete/:id',
