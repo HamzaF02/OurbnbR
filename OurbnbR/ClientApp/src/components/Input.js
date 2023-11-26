@@ -11,8 +11,8 @@ export function Inputs({ value, name, label, type, OnChange }) {
     else {
         return (
             <div className="form-group">
-                <label>{label}: </label>
-                <input value={value} name={name} type={type} onChange={OnChange} />
+                <label for={name}>{label}: </label>
+                <input value={value} name={name} type={type} onChange={OnChange} className="form-control" />
             </div>);
     }
 }

@@ -42,8 +42,8 @@ export function Orders() {
                             {orders.map(order => (
                             <tr key={order.orderId}>
                                 <td>{order.orderId}</td>
-                                <td>{order.from}</td>
-                                <td>{order.to}</td>
+                                <td>{order.from.split("T")[0]}</td>
+                                <td>{order.to.split("T")[0]}</td>
                                 <td>{order.rating}</td>
                                 <td>{order.customer.firstName} {order.customer.lastName}</td>
                                 <td>{order.rental.name}</td>
