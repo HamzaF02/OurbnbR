@@ -11,7 +11,7 @@ namespace Ourbnb.DAL
             using var serviceScope = app.ApplicationServices.CreateScope();
             RentalDbContext context = serviceScope.ServiceProvider.GetRequiredService<RentalDbContext>();
             //Creates and delets database content
-            context.Database.EnsureDeleted();
+           //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
 

@@ -1,7 +1,13 @@
-import { Details } from "./components/Details";
+import { Details } from "./components/rental/Details";
 import { Home } from "./components/Home";
-import { Orders } from "./components/Orders";
-import { Rental } from "./components/Rental";
+import { Orders } from "./components/order/Orders";
+import { Rental, getRentals } from "./components/rental/Rental";
+import { CreateRental, rentalCreateAction } from "./components/rental/Create";
+import Update from "./components/rental/Update";
+import { Delete } from "./components/rental/Delete";
+import { NewOrder } from "./components/order/newOrder";
+import UpdateOrder from "./components/order/UpdateOrder";
+import { DeleteOrder } from "./components/order/DeleteOrder";
 
 const AppRoutes = [
   {
@@ -12,14 +18,40 @@ const AppRoutes = [
         path: '/orders',
         element: <Orders/>
     },
-    
     {
-        path: '/rental',
-        element: <Rental />
+        path: '/orders/create/:id',
+        element: <NewOrder />,
     },
     {
-        path: '/details/:id',
+        path: '/orders/update/:id',
+        element: <UpdateOrder />
+    },
+    {
+        path: '/orders/delete/:id',
+        element: <DeleteOrder />
+    },
+    {
+        path: '/rental',
+        element: <Rental />,
+        loader: getRentals
+    },
+    {
+        path: '/rental/create',
+        element: <CreateRental />,
+        action: rentalCreateAction
+    },
+    {
+        path: '/rental/details/:id',
         element: <Details />
+    },
+    {
+        path: '/rental/update/:id',
+        element: <Update />,
+
+    },
+    {
+        path: '/rental/delete/:id',
+        element: <Delete />
     }
 ];
 

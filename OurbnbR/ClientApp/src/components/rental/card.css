@@ -1,0 +1,17 @@
+﻿.card {
+    width: fit-content;
+    height: 40rem;
+}
+
+.card-img-top{
+    height:220px;
+    border-radius:10px;
+}
+
+.textbox {
+    margin-top: 20px;
+}
+
+.textdeco {
+    text-decoration: inherit;
+}

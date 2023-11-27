@@ -2,7 +2,6 @@
     border-style: solid;
     border-color: #6b99bf;
     border-width: 5px;
-    transform: scaleY(1.01);
     transform-origin: top;
     transform-origin: bottom;
     transform-origin: left;
@@ -10,11 +9,14 @@
 }
 
 
-.card{
+.card {
     margin-top: 20px;
     padding: 30px;
     height: 500px;
-    
+}
+
+.card > * {
+    text-decoration:none;
 }
 
 .card h5{
@@ -27,7 +29,7 @@
 
 .add {
     margin-top: 100px;
-    text-decoration:none;
+
 }
 
 .addcard:hover {
@@ -42,14 +44,10 @@
     border-color: black;
     background-color: #8baec9;
     text-align: center;
-    height: 400px;
+    height: 40rem;
 }
 
 .row {
     width: fit-content;
 }
 
-.new {
-    height: 35rem;
-    text-decoration: none;
-}

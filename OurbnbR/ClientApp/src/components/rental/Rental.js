@@ -1,31 +1,17 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
 
 export function Rental (){
-    const [rentals, setRentals] = useState();
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        getRentals()
-    }, []);
-
-
-    async function getRentals() {
-        const response = await fetch('api/rentals/');
-        const data = await response.json();
-        setRentals(data);
-        setLoading(false);
-    }
-
+    const rentals = useLoaderData();
 
     return (
-        loading ? <p>loading...</p> :
             <div>
                 <h1>List of Rentals</h1>
 
-                <a className="btn btn-light text-dark" asp-action="Table">Table View</a>
+                <button className="btn btn-light text-dark">Table View</button>
 
                     <div className="row col  row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
 
@@ -34,7 +20,7 @@ export function Rental (){
                         
                     })}
                          
-                        <a className="link-dark">
+                    <Link tag={Link} className="link-dark" to="/rental/create">
 
                             <div className="d-flex new justify-content-between mt-1" >
                                 <div className="col addcard" >
@@ -42,9 +28,13 @@ export function Rental (){
                                     <p className="add">Post new Rental!</p>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
           </div>
        );
 }
 
+export async function getRentals() {
+    const response = await fetch('api/rentals/');
+    return await response.json();
+}

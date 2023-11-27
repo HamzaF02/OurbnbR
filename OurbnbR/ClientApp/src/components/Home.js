@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+
 import "./home.css";
 
-export class Home extends Component {
-  static displayName = Home.name;
-
-  render() {
+export function Home() {
       return (
 
           <div>
@@ -86,6 +83,6 @@ export class Home extends Component {
     </div>
 
     );
-  }
+  
 }
 
