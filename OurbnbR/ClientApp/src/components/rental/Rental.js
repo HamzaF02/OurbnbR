@@ -1,12 +1,32 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
 export function Rental() {
-    const rentals = useLoaderData();
+    const [rentals, setRentals] = useState("");
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
+
+
+     async function getRentals() {
+        const response = await fetch('api/rentals/');
+        const data = await response.json();
+        setRentals(data);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getRentals()
+    }, []);
+
+
+
+
+
+     function Rental() {
+        const rentals = useLoaderData();
 
 
         return (
@@ -45,9 +65,12 @@ export function Rental() {
                 </div>
             </div>
         );
-    }
+     }
+
+}
 
 export async function getRentals() {
     const response = await fetch('api/rentals/');
     return await response.json();
+
 }
