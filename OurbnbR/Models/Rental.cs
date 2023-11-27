@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ourbnb.Models
+namespace OurbnbR.Models
 {
     public class Rental
     {

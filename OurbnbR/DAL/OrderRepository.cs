@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 //using Ourbnb.Migrations;
-using Ourbnb.Models;
+using OurbnbR.Models;
 
-namespace Ourbnb.DAL
+namespace OurbnbR.DAL
 {
     public class OrderRepository : IRepository<Order>
     {
