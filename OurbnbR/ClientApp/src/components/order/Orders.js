@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import './orders.css';
+
 export function Orders() {
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState(true)
+    
 
     useEffect(() => {
         getOrders()
@@ -18,12 +19,16 @@ export function Orders() {
         setLoading(false);
     }
 
-
+   
+    
+    
+    
   
     return (
         loading ? <p>loading...</p> :
-        <div>
-            <div style={{ overflowX: 'auto' }}>
+            <div>
+               
+                <div style={{ overflowX: 'auto' }}>
                 <table className="table table-striped table-dark" style={{ marginTop: '30px', width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                         <tr>
