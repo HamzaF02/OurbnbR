@@ -3,9 +3,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
-
-export function Rental (){
-    const rentals = useLoaderData();
 export function Rental() {
     const [rentals, setRentals] = useState();
     const [loading, setLoading] = useState(true)
@@ -23,20 +20,26 @@ export function Rental() {
     }
     const [search, setSearch] = useState('')
 
-    console.log(search)
-    return (
+
+
+
+    export function Rental() {
+        const rentals = useLoaderData();
+
+
+        return (
             <div>
                 <h1>List of Rentals</h1>
 
                 <Form>
-                    
+
                     <input
-                        value={search }
-                            onChange={(event) => setSearch(event.target.value)}
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
                         placeholder='Search for rentals'
-                            type="text"
+                        type="text"
                     />
-                    
+
                 </Form>
 
                 <div className="row col row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
@@ -59,10 +62,7 @@ export function Rental() {
                     </Link>
                 </div>
             </div>
-    );
-}
+        );
+    }
 
-export async function getRentals() {
-    const response = await fetch('api/rentals/');
-    return await response.json();
 }
