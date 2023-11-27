@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 
@@ -10,6 +10,8 @@ export default function Update() {
         });
     const [loading, setLoading] = useState(true)
     const params = useParams()
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         getRental()
@@ -17,6 +19,7 @@ export default function Update() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        console.log(values)
         try {
             const rep = await fetch('api/rentals/update', {
                 method: 'PUT',
@@ -29,6 +32,7 @@ export default function Update() {
             const answer = await rep.json();
             console.log("Success: " + answer.success);
             if (answer.success) {
+                navigate("/rental")
             }
 
         } catch (error) {

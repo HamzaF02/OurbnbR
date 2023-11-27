@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Ourbnb.Models;
+using OurbnbR.Models;
 using System;
 
-namespace Ourbnb.DAL
+namespace OurbnbR.DAL
 {
     public class CustomerRepository : IRepository<Customer>
     {

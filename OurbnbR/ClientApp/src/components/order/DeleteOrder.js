@@ -1,9 +1,11 @@
 ﻿
 import { React } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 export function DeleteOrder() {
     const params = useParams()
+    const navigate = useNavigate()
+
 
     async function deleteConfirmed() {
         try {
@@ -17,6 +19,9 @@ export function DeleteOrder() {
 
             const answer = await rep.json();
             console.log(answer);
+            if (answer.success) {
+                navigate("/orders")
+            }
         } catch (e) {
             console.log("failed")
         }

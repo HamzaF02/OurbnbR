@@ -1,6 +1,6 @@
-﻿using Ourbnb.Models;
+﻿using OurbnbR.Models;
 using System;
-namespace Ourbnb.DAL
+namespace OurbnbR.DAL
 {
 	// repository layout for the repositories
 	public interface IRepository<T>

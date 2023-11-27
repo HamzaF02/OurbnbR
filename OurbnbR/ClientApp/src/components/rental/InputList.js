@@ -26,13 +26,13 @@ export const inputlist = [
         id: 4,
         name: "fromDate",
         label: "FromDate",
-        type: "date",
+        type: "datetime-local",
     },
     {
         id: 5,
         name: "toDate",
         label: "ToDate",
-        type: "date",
+        type: "datetime-local",
     },
     {
         id: 6,

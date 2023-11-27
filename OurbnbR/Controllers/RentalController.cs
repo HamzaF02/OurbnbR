@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Ourbnb.DAL;
-using Ourbnb.Models;
+using OurbnbR.DAL;
+using OurbnbR.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Authorization;
 
@@ -145,7 +145,8 @@ namespace OurbnbR.Controllers
                         Price = rental.Price,
                         Image = rental.Image,
                         Location = rental.Location,
-                        Rating = 0
+                        Rating = rental.Rating,
+                        Orders = rental.Orders,
                     };
                 }
                 else

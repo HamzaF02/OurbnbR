@@ -13,15 +13,15 @@ export const inputlist = [
         type: "number",
     },
     {
-    id: 3,
-    name: "from",
-    label: "From",
-    type: "date",
+        id: 3,
+        name: "from",
+        label: "From",
+        type: "datetime-local",
     },
-{
-    id: 4,
+    {   
+        id: 4,
         name: "to",
-            label: "To",
-                type: "date",
+        label: "To",
+         type: "datetime-local",
     },
 ]

@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Ourbnb.Models
+namespace OurbnbR.Models
 {
     public class Rental
     {
@@ -14,7 +14,7 @@ namespace Ourbnb.Models
         //[StringLength(200)]
         public string? Description { get; set; }
 
-        //[DisplayFormat(DataFormatString = "yyyy-MM-dd")]
+        [DataType(DataType.Date)]
         public DateTime FromDate { get; set; }
 
         //[DisplayFormat(DataFormatString = "yyyy-MM-dd")]

@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 
@@ -10,6 +10,8 @@ export function NewOrder() {
             customerId: 0, rentalId: 0, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
         });
     const [valid, setValid] = useState(true);
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         setRental()
@@ -27,8 +29,6 @@ export function NewOrder() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-
-
             const rep = await fetch('api/order/create', {
                 method: 'POST',
                 headers: {
@@ -39,7 +39,9 @@ export function NewOrder() {
 
             const answer = await rep.json();
             console.log("Success: " + answer.success);
-
+            if (answer.success) {
+                navigate("/orders")
+            }
 
         } catch (error) {
             console.log("Failed")
@@ -62,9 +64,8 @@ export function NewOrder() {
                     <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
 
                 ))}
-                    <button type="submit"  path="/Home" value="Post">Submit</button>
-                    <Link type="submit" className="btn btn-primary" value="Post"  to="/">Blogs</Link>
-            </form>
+                    <button type="submit" className="btn btn-primary" value="Post">Submit</button>
+                </form>
         </div>
     );
 }

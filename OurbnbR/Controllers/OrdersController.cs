@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Ourbnb.DAL;
-using Ourbnb.Models;
+using OurbnbR.DAL;
+using OurbnbR.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NuGet.Protocol.Core.Types;
 

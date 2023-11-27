@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Ourbnb.Models
+namespace OurbnbR.Models
 {
 
     public class Customer

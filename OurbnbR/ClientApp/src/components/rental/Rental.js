@@ -1,10 +1,11 @@
-﻿import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 
+
+export function Rental (){
+    const rentals = useLoaderData();
 export function Rental() {
     const [rentals, setRentals] = useState();
     const [loading, setLoading] = useState(true)
@@ -24,7 +25,6 @@ export function Rental() {
 
     console.log(search)
     return (
-        loading ? <p>loading...</p> :
             <div>
                 <h1>List of Rentals</h1>
 
@@ -62,3 +62,7 @@ export function Rental() {
     );
 }
 
+export async function getRentals() {
+    const response = await fetch('api/rentals/');
+    return await response.json();
+}

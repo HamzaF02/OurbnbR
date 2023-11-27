@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using Ourbnb.Models;
-namespace Ourbnb.DAL
+using OurbnbR.Models;
+namespace OurbnbR.DAL
 {
 	public class RentalDbContext : DbContext
 	{

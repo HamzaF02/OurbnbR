@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OurbnbR", "OurbnbR\OurbnbR.csproj", "{70D7E98D-40D5-4148-920B-1F797BEC46ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XunittestOurbnb", "XunittestOurbnb\XunittestOurbnb.csproj", "{63819B74-4560-4250-8D87-0B6BCFC61946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{70D7E98D-40D5-4148-920B-1F797BEC46ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D7E98D-40D5-4148-920B-1F797BEC46ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D7E98D-40D5-4148-920B-1F797BEC46ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63819B74-4560-4250-8D87-0B6BCFC61946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63819B74-4560-4250-8D87-0B6BCFC61946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63819B74-4560-4250-8D87-0B6BCFC61946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63819B74-4560-4250-8D87-0B6BCFC61946}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

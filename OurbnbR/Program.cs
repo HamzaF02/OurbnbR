@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Ourbnb.DAL;
-using Ourbnb.Models;
+using OurbnbR.DAL;
+using OurbnbR.Models;
 using Serilog;
 using Serilog.Events;
 

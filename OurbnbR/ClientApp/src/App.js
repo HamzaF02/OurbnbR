@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, RouterProvider } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
+import { createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
 import './custom.css';
 
-export default class App extends Component {
-  static displayName = App.name;
-
-  render() {
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" element={<Layout/>}>
+            {AppRoutes.map((route, index) => {
+                const { element, ...rest } = route;
+                return <Route key={index} {...rest} element={element} />;
+            })}
+        </Route>
+    )
+);
+export default function App (){
     return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, ...rest } = route;
-            return <Route key={index} {...rest} element={element} />;
-          })}
-        </Routes>
-      </Layout>
+        <RouterProvider router={router} />
     );
-  }
 }
