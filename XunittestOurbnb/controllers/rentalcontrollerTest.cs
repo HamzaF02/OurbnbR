@@ -22,7 +22,7 @@ public class ItemControllerTests
             Address = "Oslomet",
             Email = "hei@hotmail.com",
             Phone = 9999999
-        };
+        }; 
 
 
         var rentalList = new List<Rental>()
@@ -65,7 +65,10 @@ public class ItemControllerTests
 
         var mockItemRepository = new Mock<IRepository<Rental>>();
         var mockCustomerRepository = new Mock<IRepository<Customer>>();
+
+        mockCustomerRepository.Setup(repo => repo.Create(Owner)).ReturnsAsync(true);
         mockItemRepository.Setup(repo => repo.GetAll()).ReturnsAsync(rentalList);
+
         var mockLogger = new Mock<ILogger<RentalController>>();
         var itemController = new RentalController(mockItemRepository.Object,mockCustomerRepository.Object , mockLogger.Object);
         
@@ -73,10 +76,10 @@ public class ItemControllerTests
         var result = await itemController.GetAll();
 
         // assert
-        var viewResult = Assert.IsType<OkObjectResult>(result);
+        var viewResult = Assert.IsType<Rental>(result);
         var itemListViewModel = Assert.IsAssignableFrom<IEnumerable<Rental>>(viewResult);
         Assert.Equal(2, itemListViewModel.Count());
-
+        Assert.Equal(rentalList, itemListViewModel);
        
     }
 

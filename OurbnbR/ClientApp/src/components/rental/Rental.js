@@ -1,29 +1,31 @@
 ﻿import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
 export function Rental() {
-    const [rentals, setRentals] = useState();
+    const [rentals, setRentals] = useState("");
     const [loading, setLoading] = useState(true)
+    const [search, setSearch] = useState('')
+
+
+     async function getRentals() {
+        const response = await fetch('api/rentals/');
+        const data = await response.json();
+        setRentals(data);
+        setLoading(false);
+    }
 
     useEffect(() => {
         getRentals()
     }, []);
 
 
-    async function getRentals() {
-        const response = await fetch('api/rentals/');
-        const data = await response.json();
-        setRentals(data);
-        setLoading(false);
-    }
-    const [search, setSearch] = useState('')
 
 
 
-
-    export function Rental() {
+     function Rental() {
         const rentals = useLoaderData();
 
 
@@ -31,7 +33,7 @@ export function Rental() {
             <div>
                 <h1>List of Rentals</h1>
 
-                <Form>
+                <form>
 
                     <input
                         value={search}
@@ -40,7 +42,7 @@ export function Rental() {
                         type="text"
                     />
 
-                </Form>
+                </form>
 
                 <div className="row col row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
 
@@ -63,6 +65,12 @@ export function Rental() {
                 </div>
             </div>
         );
-    }
+     }
+
+}
+
+export async function getRentals() {
+    const response = await fetch('api/rentals/');
+    return await response.json();
 
 }
