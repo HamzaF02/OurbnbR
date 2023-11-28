@@ -44,7 +44,7 @@ export const inputlist = [
     {
         id: 5,
         name: "toDate",
-        errormsg: "To date must be greater than today",
+        errormsg: "To date must be greater than fromDate",
         label: "ToDate",
         type: "datetime-local",
         required: true,
@@ -65,7 +65,7 @@ export const inputlist = [
         label: "OwnerId",
         type: "number",
         required: true,
-        min: 1,
+        min: 0,
     },
     {
         id: 8,
