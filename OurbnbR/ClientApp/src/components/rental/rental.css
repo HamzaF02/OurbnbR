@@ -51,3 +51,14 @@
     width: fit-content;
 }
 
+.search{
+    padding:10px;
+    border-radius:10px;
+}
+
+.fit {
+     width: 100%;
+}
+
+
+

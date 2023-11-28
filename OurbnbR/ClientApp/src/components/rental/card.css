@@ -15,3 +15,7 @@
 .textdeco {
     text-decoration: inherit;
 }
+
+.long {
+    width: revert;
+}

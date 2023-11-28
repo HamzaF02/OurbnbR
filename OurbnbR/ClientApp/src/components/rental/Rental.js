@@ -15,7 +15,7 @@ export function Rental() {
 
             <form>
 
-                <input
+                <input className="search"
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                     placeholder='Search for rentals'
@@ -24,12 +24,12 @@ export function Rental() {
 
             </form>
 
-            <div className="row col row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
+            <div className="row col row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 fit ">
 
                 {rentals.filter((rental) => {
                     return search.toLowerCase() === '' ? rental : rental.name.toLowerCase().includes(search.toLowerCase())
                 }).map(rental => {
-                    return <Card key={rental.rentalId} rental={rental} />
+                    return <Card key={rental.rentalId} rental={rental}  />
 
                 })}
 
