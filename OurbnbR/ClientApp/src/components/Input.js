@@ -1,5 +1,6 @@
 import { React } from 'react';
 import "./input.css"
+import { inputlist } from './rental/InputList';
 
 export function Inputs({ value, name, label, errormsg, type, OnChange }) {
 
