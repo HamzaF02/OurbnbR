@@ -11,6 +11,8 @@ export default function Update() {
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
+    const [error,setError] = useState("")
+
 
 
     useEffect(() => {
@@ -20,6 +22,10 @@ export default function Update() {
     async function handleSubmit(e) {
         e.preventDefault();
         console.log(values)
+        if (values.fromDate < values.toDate) {
+            setError("Dates are not valid")
+        }
+
         try {
             const rep = await fetch('api/rentals/update', {
                 method: 'PUT',
@@ -58,6 +64,7 @@ export default function Update() {
         loading ? <p>loading...</p> :
             <div>
                 <h1>Update Rental</h1>
+                <p>{error}</p>
                 <form onSubmit={handleSubmit}>
                     {inputlist.map((input) => (
                         <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />

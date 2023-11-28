@@ -46,9 +46,11 @@ export const rentalCreateAction = async ({request}) => {
         name: data.get("name"), price: data.get("price"), description: data.get("description"), image: data.get("image"), location: data.get("location"), fromDate: data.get("fromDate"), toDate: data.get("toDate"), ownerId: data.get("ownerId"), owner: { }
     }
     console.log(values)
+   
+    if (values.fromDate > values.toDate) {
+        return { error: "Dates are not valid" }
+    }
     try {
-
-
         const rep = await fetch('api/rentals/create', {
             method: 'POST',
             headers: {
@@ -66,6 +68,6 @@ export const rentalCreateAction = async ({request}) => {
 
     } catch (error) {
         console.log("Failed")
-        return {error:"Failed"}
+        return { error: error.message}
     }
 }

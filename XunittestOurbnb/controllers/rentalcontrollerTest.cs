@@ -144,21 +144,18 @@ public class RentalControllerTests
         var mockRentalRepository = new Mock<IRepository<Rental>>();
         var mockCustomerRepository = new Mock<IRepository<Customer>>();
 
-        mockCustomerRepository.Setup(repo => repo.getObjectById(Owner.CustomerId)).ReturnsAsync(Owner);
-
-        mockRentalRepository.Setup(repo => repo.GetAll()).ReturnsAsync(rentalList);
+        mockRentalRepository.Setup(repo => repo.GetAll()).ReturnsAsync((IEnumerable<Rental>?) null);
 
         var mockLogger = new Mock<ILogger<RentalController>>();
         var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
 
         // act
-        var result = await rentalController.GetAll() as OkObjectResult;
+        var result = await rentalController.GetAll();
 
         // assert
-        var response = Assert.IsType<List<Rental>>(result.Value);
-        var responseList = Assert.IsAssignableFrom<IEnumerable<Rental>>(response);
-        Assert.Equal(2, responseList.Count());
-        Assert.NotEqual(rentalList, responseList);
+        var response = Assert.IsType<NotFoundObjectResult>(result);
+        var responseValue = Assert.IsAssignableFrom<string>(response.Value);
+        Assert.Equal("Rental list not found", responseValue);
 
     }
 
@@ -415,7 +412,7 @@ public class RentalControllerTests
         var mockCustomerRepository = new Mock<IRepository<Customer>>();
 
         var mockRentalRepository = new Mock<IRepository<Rental>>();
-        mockRentalRepository.Setup(repo => repo.getObjectById(testRental.RentalId)).ReturnsAsync(testRental);
+        mockRentalRepository.Setup(repo => repo.getObjectById(testRental.RentalId)).ReturnsAsync((Rental?) null);
 
         var mockLogger = new Mock<ILogger<RentalController>>();
         var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
@@ -426,9 +423,9 @@ public class RentalControllerTests
         var result = await rentalController.GetObjectById(testRental.RentalId);
 
         // Assert if response was correct
-        var response = Assert.IsType<OkObjectResult>(result);
-        var responseValue = Assert.IsAssignableFrom<Rental>(response.Value);
-        Assert.NotEqual(responseValue, testRental);
+        var response = Assert.IsType<NotFoundObjectResult>(result);
+        var responseValue = Assert.IsAssignableFrom<string>(response.Value);
+        Assert.Equal("Rental not found for the RentalId", responseValue);
     }
 
     // test if update works

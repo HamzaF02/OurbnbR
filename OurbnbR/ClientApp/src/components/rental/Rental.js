@@ -12,7 +12,6 @@ export function Rental() {
 
     return (
         <div>
-        <div >
             <h1>List of Rentals</h1>
 
             <form>
@@ -46,7 +45,6 @@ export function Rental() {
                 </Link>
             </div>
             </div>
-        </div>
     );
 }
 

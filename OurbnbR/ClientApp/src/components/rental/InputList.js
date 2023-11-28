@@ -1,3 +1,5 @@
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()+"T00:00:00";
 export const inputlist = [
     {
         id: 1,
@@ -6,7 +8,7 @@ export const inputlist = [
         label: "Name",
         type: "text",
         required: true,
-        pattern: "^[A-Za-z0-9]{2,50}$",
+        pattern: "^[A-Za-z0-9 ]{2,50}$",
         
         
     },
@@ -17,7 +19,7 @@ export const inputlist = [
         label: "Price",
         type: "number",
         required: true,
-        pattern: "^[0-9]{1,10}$",
+        min: 1
         
     },
     {
@@ -32,10 +34,11 @@ export const inputlist = [
     {
         id: 4,
         name: "fromDate",
-        errormsg: "From date must be greater than fromDate",
+        errormsg: "From date must be greater than today",
         label: "FromDate",
         type: "datetime-local",
         required: true,
+        min: date
 
     },
     {
@@ -45,6 +48,7 @@ export const inputlist = [
         label: "ToDate",
         type: "datetime-local",
         required: true,
+        min: date
     },
     {
         id: 6,
@@ -61,7 +65,7 @@ export const inputlist = [
         label: "OwnerId",
         type: "number",
         required: true,
-        pattern: "^[0-9]{1,10}$",
+        min: 0,
     },
     {
         id: 8,
