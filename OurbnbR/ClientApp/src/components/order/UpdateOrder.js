@@ -12,7 +12,6 @@ export default function UpdateOrder() {
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
-    const [error, setError] = useState("")
 
     useEffect(() => {
         getOrder()
@@ -20,10 +19,6 @@ export default function UpdateOrder() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        if (values.from > values.to) {
-            setError("Dates are not valid");
-            return;
-        }
         try {
             const rep = await fetch('api/order/update', {
                 method: 'PUT',
@@ -61,7 +56,6 @@ export default function UpdateOrder() {
 
         loading ? <p>loading...</p> :
             <div>
-                <p>{error}</p>
                 <h1>Update Order</h1>
                 <form onSubmit={handleSubmit}>
                     {inputlist.map((input) => (

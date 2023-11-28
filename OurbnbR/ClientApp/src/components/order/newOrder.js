@@ -11,7 +11,6 @@ export function NewOrder() {
         });
     const [valid, setValid] = useState(true);
     const navigate = useNavigate()
-    const [error, setError] = useState("")
 
 
     useEffect(() => {
@@ -29,11 +28,6 @@ export function NewOrder() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(values);
-        if (values.from > values.to) {
-            setError("Dates are not valid");
-            return;
-        }
         try {
             const rep = await fetch('api/order/create', {
                 method: 'POST',
@@ -65,8 +59,7 @@ export function NewOrder() {
         valid ? <p>Invalid</p>: 
         <div>
             <h1>Create Order</h1>
-                <p>{error}</p>
-                <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 {inputlist.map((input) => (
                     <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
 
