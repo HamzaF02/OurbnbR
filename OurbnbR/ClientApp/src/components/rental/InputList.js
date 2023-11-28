@@ -26,6 +26,7 @@ export const inputlist = [
         errormsg: "",
         label: "Description",
         type: "text",
+        required: false,
     },
 
     {
@@ -51,6 +52,7 @@ export const inputlist = [
         errormsg: "",
         label: "Image",
         type: "text",
+        required: false,
     },
     {
         id: 7,

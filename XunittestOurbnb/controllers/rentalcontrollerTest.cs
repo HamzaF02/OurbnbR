@@ -142,6 +142,7 @@ public class RentalControllerTests
         var mockCustomerRepository = new Mock<IRepository<Customer>>();
 
         mockCustomerRepository.Setup(repo => repo.getObjectById(Owner.CustomerId)).ReturnsAsync(Owner);
+
         mockRentalRepository.Setup(repo => repo.GetAll()).ReturnsAsync(rentalList);
 
         var mockLogger = new Mock<ILogger<RentalController>>();
