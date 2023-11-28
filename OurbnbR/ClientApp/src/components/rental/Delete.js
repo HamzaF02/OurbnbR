@@ -22,10 +22,8 @@ export function Delete() {
             if (answer.success) {
                 navigate("/rental")
             }
-            
         } catch (e) {
             console.log("failed")
-            
         }
     }
     return (
