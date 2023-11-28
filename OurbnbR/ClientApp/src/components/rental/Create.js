@@ -3,6 +3,7 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
 
+
 export function CreateRental() {
         const [values, setValues] = useState(
             {
@@ -28,9 +29,10 @@ export function CreateRental() {
                     <Form method="post" action="/rental/create">
                         {inputlist.map((input) => (
                             <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-
+                            
                         ))}
-                        <button type="submit" className="btn btn-primary" value="Post">Submit</button>
+
+                    <button type="submit" className="btn btn-primary knapp" value="Post">Submit</button>
                     </Form>
                 </div>
         );
