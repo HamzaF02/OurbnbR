@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/OurbnbR/Pages/Controllers
+/OurbnbR/RentalDatabase.db-shm
+/OurbnbR/RentalDatabase.db-wal
+/.gitignore
+/.gitignore
+/.gitignore
