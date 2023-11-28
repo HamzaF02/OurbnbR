@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
+import './orders.css';
 
 
 export default function UpdateOrder() {
@@ -61,7 +62,7 @@ export default function UpdateOrder() {
                         <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
 
                     ))}
-                    <button type="submit" className="btn btn-primary" value="Post">Submit</button>
+                    <button type="submit" className="btn btn-primary submitUpdate" value="Post">Submit</button>
                 </form>
             </div>
     );

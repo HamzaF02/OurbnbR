@@ -1,2 +1,13 @@
-﻿
+﻿.knapp {
+    margin: 10px;
+    width: 100px;
+}
 
+.box{
+    overflow-x:auto;
+}
+
+.submitUpdate{
+    margin-top:20px;
+    width:100px;
+}

@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';
 
+
 export function Rental() {
     const rentals = useLoaderData();
     const [loading, setLoading] = useState(true)
@@ -11,6 +12,7 @@ export function Rental() {
 
     return (
         <div>
+        <div >
             <h1>List of Rentals</h1>
 
             <form>
@@ -42,6 +44,7 @@ export function Rental() {
                         </div>
                     </div>
                 </Link>
+            </div>
             </div>
         </div>
     );

@@ -12,10 +12,7 @@
     margin-top: 20px;
 }
 
-.textdeco {
-    text-decoration: inherit;
+.textdeco > * {
+    text-decoration: none;
 }
 
-.long {
-    width: revert;
-}

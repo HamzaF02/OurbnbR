@@ -27,8 +27,8 @@ export function Orders() {
     return (
         loading ? <p>loading...</p> :
             <div>
-               
-                <div style={{ overflowX: 'auto' }}>
+
+                <div className="box">
                 <table className="table table-striped table-dark" style={{ marginTop: '30px', width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                         <tr>
@@ -54,8 +54,8 @@ export function Orders() {
                                 <td>{order.rental.name}</td>
                                     <td>{order.totalPrice}</td>
                                     <td>
-                                        <Link className="btn btn-outline-primary info" to={"/orders/update/" + order.orderId}>Update</Link>
-                                        <Link className="btn btn-outline-danger info" to={"/orders/delete/" + order.orderId}>Delete</Link>
+                                        <Link className="btn btn-outline-primary info knapp" to={"/orders/update/" + order.orderId}>Update</Link>
+                                        <Link className="btn btn-outline-danger info knapp" to={"/orders/delete/" + order.orderId}>Delete</Link>
                                     </td>
                             </tr>
                         ))}

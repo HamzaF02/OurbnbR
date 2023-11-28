@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
+import "./rental.css";
 
 export function Details() {
     const [rental,setRental] = useState();
@@ -43,12 +44,11 @@ export function Details() {
                             <h5 className="pull-right">Rating: {rental.rating}</h5>
                         <div >
 
-                        <Link className="btn btn-outline-primary info" to={"/rental/update/" + rental.rentalId}>Update</Link>
-                        <Link className="btn btn-outline-danger info" to={"/rental/delete/" + rental.rentalId}>Delete</Link>
-                        <Link className="btn btn-outline-success info" to={"/orders/create/" + rental.rentalId}>Rent out</Link>
-
-
-                        <Link className="btn btn-outline-info info" to="/rental">Back to Grid View</Link>
+                        <Link className="btn btn-outline-success info knapp" to={"/orders/create/" + rental.rentalId}>Rent out</Link>
+                        <Link className="btn btn-outline-primary info knapp" to={"/rental/update/" + rental.rentalId}>Update</Link>
+                        <Link className="btn btn-outline-danger info knapp" to={"/rental/delete/" + rental.rentalId}>Delete</Link>
+                        
+                        <Link className="btn btn-outline-info info knapp" to="/rental">Back to Grid View</Link>
 
                         </div>
 
