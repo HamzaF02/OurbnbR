@@ -1,0 +1,10 @@
+﻿span {
+    color: red;
+    float:right;
+    display:none;
+}
+
+input:invalid ~ span {
+    display:block;
+}
+

@@ -27,7 +27,8 @@ export function CreateRental() {
                 <h1>Create Rental</h1>
                 {errorMessage && errorMessage.error && <p className="text-danger">{errorMessage.error}</p>}
                     <Form method="post" action="/rental/create">
-                        {inputlist.map((input) => (
+                    {inputlist.map((input) => (
+                   
                             <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
                             
                         ))}
@@ -61,7 +62,7 @@ export const rentalCreateAction = async ({request}) => {
             return redirect('/rental')
         }
         console.log("Invalid");
-        return { error: "Failed" }
+        return { error: "Inncorrect information" }
 
     } catch (error) {
         console.log("Failed")

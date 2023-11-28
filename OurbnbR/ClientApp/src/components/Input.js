@@ -1,6 +1,7 @@
 import { React } from 'react';
+import "./input.css"
 
-export function Inputs({ value, name, label, type, OnChange }) {
+export function Inputs({ value, name, label, errormsg, type, OnChange }) {
 
     if (type == "hidden") {
         return (
@@ -11,7 +12,9 @@ export function Inputs({ value, name, label, type, OnChange }) {
     else {
         return (
             <div className="form-group">
+               
                 <label for={name}>{label}: </label>
+                <span>{errormsg}</span>
                 <input value={value} name={name} type={type} onChange={OnChange} className="form-control" />
             </div>);
     }
