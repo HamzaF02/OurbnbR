@@ -22,7 +22,7 @@ export default function Update() {
     async function handleSubmit(e) {
         e.preventDefault();
         console.log(values)
-        if (values.fromDate < values.toDate) {
+        if (values.fromDate > values.toDate) {
             setError("Dates are not valid")
         }
 
