@@ -4,7 +4,8 @@
     display:none;
 }
 
-input:invalid ~ span{
+
+:invalid ~ span{
     display:block;
 }
 
