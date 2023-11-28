@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './orders.css';
+import { parseDateTime, parseNumber, parsePrice } from '../../formating';
 
 
 export function Orders() {
@@ -48,16 +49,16 @@ export function Orders() {
                             {orders.map(order => (
                             <tr key={order.orderId}>
                                 <td>{order.orderId}</td>
-                                <td>{order.from.split("T")[0]}</td>
-                                <td>{order.to.split("T")[0]}</td>
-                                <td>{order.rating}</td>
+                                <td>{parseDateTime( order.from)}</td>
+                                <td>{parseDateTime(order.to)}</td>
+                                <td>{parseNumber(order.rating,1)}</td>
                                 <td>{order.customer.firstName} {order.customer.lastName}</td>
                                 <td>{order.rental.name}</td>
-                                    <td>{order.totalPrice}</td>
-                                    <td>
-                                        <Link className="btn btn-outline-primary info knapp" to={"/orders/update/" + order.orderId}>Update</Link>
-                                        <Link className="btn btn-outline-danger info knapp" to={"/orders/delete/" + order.orderId}>Delete</Link>
-                                    </td>
+                                <td>{parsePrice(order.totalPrice)}</td>
+                                <td>
+                                    <Link className="btn btn-outline-primary info knapp" to={"/orders/update/" + order.orderId}>Update</Link>
+                                    <Link className="btn btn-outline-danger info knapp" to={"/orders/delete/" + order.orderId}>Delete</Link>
+                                </td>
                             </tr>
                         ))}
                         

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
+<<<<<<< HEAD
 import "./rental.css";
+=======
+import { parseDateTime, parseNumber, parsePrice } from '../../formating';
+
+>>>>>>> damn
 
 export function Details() {
     const [rental,setRental] = useState();
@@ -39,9 +44,9 @@ export function Details() {
                             <h3 className="pull-right">Location: {rental.location}</h3>
                             <h5 className="pull-right">Owner: {rental.owner.firstName} {rental.owner.lastName}</h5>
                             <h5>{rental.description}</h5>
-                            <h5>Available from {rental.fromDate.split("T")[0]} to {rental.toDate.split("T")[0]}</h5>   
-                            <h5 className="pull-right">Price per/n: {Number.parseFloat(rental.price).toFixed(2)}</h5>
-                            <h5 className="pull-right">Rating: {rental.rating}</h5>
+                            <h5>Available from {parseDateTime(rental.fromDate)} to {parseDateTime(rental.toDate)}</h5>
+                            <h5 className="pull-right">Price per/n: {parsePrice(rental.price)}</h5>
+                            <h5 className="pull-right">Rating: {parseNumber(rental.rating,1)}</h5>
                         <div >
 
                         <Link className="btn btn-outline-success info knapper" to={"/orders/create/" + rental.rentalId}>Rent out</Link>

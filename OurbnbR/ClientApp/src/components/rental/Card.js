@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./card.css";
+import { parseNumber, parsePrice } from "../../formating"
 
 export function Card({ rental }) {
     return (
@@ -20,7 +21,7 @@ export function Card({ rental }) {
                             <div className="d-flex justify-content-between mt-1 flex-lg-column flex-md-column flex-xl-row">
                                 <div className="text-nowrap  p-2">
                                     <p >Rating</p>
-                                    {rental.rating}
+                                    {parseNumber(rental.rating,1)}
                                     <i className="fa fa-star"></i>
                                 </div>
                                 <div className="text-nowrap  p-2">
@@ -29,7 +30,7 @@ export function Card({ rental }) {
                                 </div>
                                 <div className="text-nowrap  p-2">
                                     <p>Price per/n:</p>
-                                    {Number.parseFloat(rental.price).toFixed(2)}
+                                    {parsePrice(rental.price)}
                                 </div>
                             </div>
                         </div>
