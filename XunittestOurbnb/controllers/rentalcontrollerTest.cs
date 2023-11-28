@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using Moq;
 using OurbnbR.Controllers;
@@ -7,10 +8,10 @@ using OurbnbR.Models;
 
 namespace XunitTestMyShop.Controllers;
 
-public class ItemControllerTests
+public class RentalControllerTests
 {
     [Fact]
-    public async Task TestRentalPage()
+    public async Task TestGetAllRentalOK()
     {
 
         // arrange
@@ -76,10 +77,10 @@ public class ItemControllerTests
         var result = await rentalController.GetAll() as OkObjectResult;
 
         // assert
-        var viewResult = Assert.IsType<List<Rental>>(result.Value);
-        var itemListViewModel = Assert.IsAssignableFrom<IEnumerable<Rental>>(viewResult);
-        Assert.Equal(2, itemListViewModel.Count());
-        Assert.Equal(rentalList, itemListViewModel);
+        var response = Assert.IsType<List<Rental>>(result.Value);
+        var responseList = Assert.IsAssignableFrom<IEnumerable<Rental>>(response);
+        Assert.Equal(2, responseList.Count());
+        Assert.Equal(rentalList, responseList);
        
     }
 
@@ -98,7 +99,7 @@ public class ItemControllerTests
             Phone = 9999999
         };
 
-        var testItem = new Rental
+        var testRental = new Rental
         {
             RentalId = 1,
             Name = "House1",
@@ -119,22 +120,149 @@ public class ItemControllerTests
         mockCustomerRepository.Setup(repo => repo.getObjectById(Owner.CustomerId)).ReturnsAsync(Owner);
 
         var mockRentalRepository = new Mock<IRepository<Rental>>();
-        mockRentalRepository.Setup(repo => repo.Create(testItem)).ReturnsAsync(false);
+        mockRentalRepository.Setup(repo => repo.Create(It.IsAny<Rental>())).ReturnsAsync(false);
 
         var mockLogger = new Mock<ILogger<RentalController>>();
-        var itemController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
+        var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
 
 
 
         // act
-        var result = await itemController.Create(testItem);
+        var result = await rentalController.Create(testRental);
 
         // assert
-        var viewResult = Assert.IsType<OkObjectResult>(result);
+        var response = Assert.IsType<OkObjectResult>(result);
        
-        var viewItem = Assert.IsAssignableFrom<ServerResponse>(viewResult.Value);
-        Assert.False(viewItem.success);
-    } 
+        var responseValue = Assert.IsAssignableFrom<ServerResponse>(response.Value);
+        Assert.False(responseValue.success);
+    }
+
+    [Fact]
+    public async Task TestDeleteRentalNotOk()
+    {
+        // arrange
+        int rentalId = 1;
+
+        var mockCustomerRepository = new Mock<IRepository<Customer>>();
+
+        var mockRentalRepository = new Mock<IRepository<Rental>>();
+        mockRentalRepository.Setup(repo => repo.Delete(rentalId)).ReturnsAsync(false);
+
+        var mockLogger = new Mock<ILogger<RentalController>>();
+        var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
 
 
+
+        // act
+        var result = await rentalController.Delete(rentalId);
+
+        // assert
+        var response = Assert.IsType<OkObjectResult>(result);
+
+        var responseValue = Assert.IsAssignableFrom<ServerResponse>(response.Value);
+        Assert.False(responseValue.success);
+    }
+    [Fact]
+    public async Task TestGetObjecByIdRentalNotOk()
+    {
+        // Arrange objects for testing
+        var Owner = new Customer
+        {
+            CustomerId = 1,
+            FirstName = "Hamza",
+            LastName = "Ylli",
+            Address = "Oslomet",
+            Email = "hei@hotmail.com",
+            Phone = 9999999
+        };
+
+        var testRental = new Rental
+        {
+            RentalId = 1,
+            Name = "House1",
+            Description = "Delicious view",
+            FromDate = new DateTime(2023, 12, 10),
+            ToDate = new DateTime(2023, 12, 12),
+            Rating = 3,
+            Location = "Oslo",
+            Price = 20,
+            Image = "/images/LeidHus.jpg",
+            OwnerId = 1,
+            Owner = Owner
+
+        };
+
+        //Making mock repositories and setup for how it should interact
+        var mockCustomerRepository = new Mock<IRepository<Customer>>();
+
+        var mockRentalRepository = new Mock<IRepository<Rental>>();
+        mockRentalRepository.Setup(repo => repo.getObjectById(testRental.RentalId)).ReturnsAsync(testRental);
+
+        var mockLogger = new Mock<ILogger<RentalController>>();
+        var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
+
+
+
+        // Act out the controller function
+        var result = await rentalController.GetObjectById(testRental.RentalId);
+
+        // Assert if response was correct
+        var response = Assert.IsType<OkObjectResult>(result);
+        var responseValue = Assert.IsAssignableFrom<Rental>(response.Value);
+        Assert.Equal(responseValue, testRental);
+    }
+
+    [Fact]
+    public async Task TestUpdateRentalOk()
+    {
+        // arrange
+
+        var Owner = new Customer
+        {
+            CustomerId = 1,
+            FirstName = "Hamza",
+            LastName = "Ylli",
+            Address = "Oslomet",
+            Email = "hei@hotmail.com",
+            Phone = 9999999
+        };
+
+        var testRental = new Rental
+        {
+            RentalId = 1,
+            Name = "House1",
+            Description = "Delicious view",
+            FromDate = new DateTime(2023, 12, 10),
+            ToDate = new DateTime(2023, 12, 12),
+            Rating = 3,
+            Location = "Oslo",
+            Price = 20,
+            Image = "/images/LeidHus.jpg",
+            OwnerId = 1,
+            Owner = Owner,
+            Orders = null
+        };
+
+
+
+        var mockCustomerRepository = new Mock<IRepository<Customer>>();
+        mockCustomerRepository.Setup(repo => repo.getObjectById(Owner.CustomerId)).ReturnsAsync(Owner);
+
+        var mockRentalRepository = new Mock<IRepository<Rental>>();
+        mockRentalRepository.Setup(repo => repo.Update(It.IsAny<Rental>())).ReturnsAsync(true);
+
+        var mockLogger = new Mock<ILogger<RentalController>>();
+        var rentalController = new RentalController(mockRentalRepository.Object, mockCustomerRepository.Object, mockLogger.Object);
+
+
+
+        // act
+        var result = await rentalController.Update(testRental);
+
+        // assert
+        var response = Assert.IsType<OkObjectResult>(result);
+
+        var responseValue = Assert.IsAssignableFrom<ServerResponse>(response.Value);
+        Assert.True(responseValue.success);
+    }
 }

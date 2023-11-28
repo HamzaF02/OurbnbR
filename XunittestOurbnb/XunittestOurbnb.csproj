@@ -27,7 +27,4 @@
   <ItemGroup>
     <None Remove="controllers\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="controllers\" />
-  </ItemGroup>
 </Project>

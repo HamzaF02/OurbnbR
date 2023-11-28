@@ -37,7 +37,7 @@ namespace OurbnbR.Controllers
            return Ok(rentals);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetItemById(int id)
+        public async Task<IActionResult> GetObjectById(int id)
         {
             //Gets current Rental
             var rental = await _repository.getObjectById(id);
@@ -69,7 +69,7 @@ namespace OurbnbR.Controllers
 
                 //Checks if dates are valid
                 int checkDate = DateTime.Compare(rental.FromDate, rental.ToDate);
-                if (checkDate < 0 && rental.FromDate >= DateTime.Now.Date)
+                if ((checkDate < 0 && rental.FromDate >= DateTime.Now.Date))
                 {
                     //Creation of Rental object
                     newRental = new Rental
@@ -178,16 +178,21 @@ namespace OurbnbR.Controllers
         public async Task<IActionResult> Delete([FromBody]int id)
         {
             //Delets Rental and if it fails, deals with it accordingly with logs and BadRequest
-            bool OK = await _repository.Delete(id);
-            if (!OK)
+            try
             {
-                _logger.LogError("[RentalController] Rental deletion failed for the RentalId {RentalId:0000}", id);
+                bool OK = await _repository.Delete(id);
+                if (!OK)
+                {
+                    _logger.LogError("[RentalController] Rental deletion failed for the RentalId {RentalId:0000}", id);
+                    return Ok(new ServerResponse { success = false, message = "Rental deletion failed" });
+                }
+                return Ok(new ServerResponse { success = true, message = "Rental Deletion complete" });
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("[RentalController] Rental deletion failed for the RentalId {RentalId:0000}, error: {ex}", id,ex.Message);
                 return BadRequest("Rental deletion failed, return to homepage");
             }
-
-            //Redirects to Rentals Main page
-            return Ok(new ServerResponse { success = true, message = "Rental Deletion complete" });
-
         }
 
 
