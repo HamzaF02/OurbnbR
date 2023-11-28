@@ -29,7 +29,6 @@ namespace OurbnbR.Controllers
         public async Task<IActionResult> GetAll()
         {
            var rentals = await _repository.GetAll();
-            _logger.LogInformation("rentals: "+ rentals);
            if (rentals == null)
            {
                _logger.LogError("[RentalController] Rental list not found while executing _repository.GetAll()");
@@ -99,16 +98,16 @@ namespace OurbnbR.Controllers
                 {
                     //logs and return error message to view
                     _logger.LogWarning("[RentalController] Rental creation failed {@rental}", rental);
-                    return Ok(new { success= false, message= "Rental creation failed"});
+                    return Ok(new ServerResponse{ success= false, message= "Rental creation failed"});
                 }
                 //Redirects to Main Rentals Page
-                return Ok(new {success = true, message = "Rental created"});
+                return Ok(new ServerResponse { success = true, message = "Rental created"});
             }
             catch (Exception ex)
             {
                 //In case of exception it logs error and goes back to input field with message
                 _logger.LogWarning("[RentalController] Rental creation failed {@rental}, error message: {ex}", rental, ex.Message);
-                return Ok(new { success = false, message = "Rental creation failed"});
+                return Ok(new ServerResponse { success = false, message = "Rental creation failed"});
             }
         }
 
@@ -161,16 +160,16 @@ namespace OurbnbR.Controllers
                 {
                     //logs and return error message to view
                     _logger.LogWarning("[RentalController] Rental update failed {@rental}", rental);
-                    return Ok(new { success = false, message = "Rental Update failed" });
+                    return Ok(new ServerResponse { success = false, message = "Rental Update failed" });
                 }
                 //Redirects to Main Rentals Page
-                return Ok(new { success = true, message = "Rental Updated" });
+                return Ok(new ServerResponse { success = true, message = "Rental Updated" });
             }
             catch (Exception ex)
             {
                 //In case of exception it logs error and goes back to input field with message
                 _logger.LogWarning("[RentalController] Rental update failed {@rental}, error message: {ex}", rental, ex.Message);
-                return Ok(new { success = false, message = "Rental updatea failed" });
+                return Ok(new ServerResponse { success = false, message = "Rental updatea failed" });
             }
         }
 
@@ -187,7 +186,7 @@ namespace OurbnbR.Controllers
             }
 
             //Redirects to Rentals Main page
-            return Ok(new { success = true, message = "Rental Deletion complete" });
+            return Ok(new ServerResponse { success = true, message = "Rental Deletion complete" });
 
         }
 

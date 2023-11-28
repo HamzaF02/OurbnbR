@@ -6,7 +6,6 @@ import { Card } from './Card';
 
 export function Rental() {
     const rentals = useLoaderData();
-    const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
 
 
