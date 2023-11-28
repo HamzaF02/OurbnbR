@@ -104,20 +104,20 @@ namespace OurbnbR.Controllers
                 if (!ok)
                 {
                     _logger.LogWarning("[OrdersController] newOrder creation failed {@newOrder}", newOrder);
-                    return Ok(new { succuss=false, message="Order creation failed"});
+                    return Ok(new ServerResponse { success=false, message="Order creation failed"});
                 }
 
                 //Updates rentals Rating
                 await UpdateRental(rental);
 
                //Redirects to Main Orders Page
-               return Ok(new {success=true, message="Order creation complete"});
+               return Ok(new ServerResponse { success=true, message="Order creation complete"});
             }
             catch (Exception ex)
             {
                 //In case of exception it logs error and goes back to input field with message
                 _logger.LogWarning("[OrdersController] newOrder creation failed, error message: {ex}", ex.Message);
-                return Ok(new { success = false, message = "Order creation failed" });
+                return Ok(new ServerResponse { success = false, message = "Order creation failed" });
     }
 }
 
@@ -175,17 +175,17 @@ namespace OurbnbR.Controllers
                 {
                     //Updates rental rating and goes back to listoforders
                     await UpdateRental(rental);
-                    return Ok(new { success = true, message="Update order"});
+                    return Ok(new ServerResponse { success = true, message = "Update order" });
                 }
                 _logger.LogError("[OrdersController] Order failed to update {@order}", order);
-                return Ok(new { success = false, message = "Order update failed" });
+                return Ok(new ServerResponse { success = false, message = "Order update failed" });
 
             }
             catch (Exception ex)
             {
                 //In case of exception it logs error and returns view with message
                 _logger.LogError("[OrdersController] Order failed to update {@order}, error message: {ex} ", order, ex.Message);
-                return Ok(new { success = false, message = "Order updatea failed" });
+                return Ok(new ServerResponse { success = false, message = "Order updatea failed" });
 
             }
         }
@@ -206,7 +206,7 @@ namespace OurbnbR.Controllers
                     await UpdateRental(order.RentalId);
                 }
                 //Redirects to ListofOrders
-                return Ok(new {success=true, message="Order has been deleted"});
+                return Ok(new ServerResponse { success = true, message = "Order has been deleted" });
             }
 
             //Error handling incase of deletion mistake

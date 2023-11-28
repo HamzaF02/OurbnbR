@@ -64,7 +64,7 @@ namespace OurbnbR.Controllers
             if (ModelState.IsValid)
             {
                 bool ok = await _repository.Create(customer);
-                if (ok) return Ok(new { success = true, message = "Customer created"});
+                if (ok) return Ok(new ServerResponse { success = true, message = "Customer created"});
             }
             return BadRequest("Customer creation failed");
         }
@@ -75,7 +75,7 @@ namespace OurbnbR.Controllers
             if (ModelState.IsValid)
             {
                 bool ok = await _repository.Update(customer);
-                if (ok) return Ok(new { success = true, message = "Customer updated" });
+                if (ok) return Ok(new ServerResponse { success = true, message = "Customer updated" });
             }
             return BadRequest("Customer update failed");
         }
@@ -86,7 +86,7 @@ namespace OurbnbR.Controllers
             if (ModelState.IsValid)
             {
                 bool ok = await _repository.Delete(id);
-                if (ok) return Ok(new { success = true, message = "Customer deleted" });
+                if (ok) return Ok(new ServerResponse { success = true, message = "Customer deleted" });
             }
             return BadRequest("Customer deletion failed");
         }
