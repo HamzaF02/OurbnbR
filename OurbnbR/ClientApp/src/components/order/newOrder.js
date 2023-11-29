@@ -39,6 +39,7 @@ export function NewOrder() {
             const data = await response.json();
             setRental(data);
             setLoading(false);
+            setValues({ ...values, rentalId: params.id });
 
         }
 
