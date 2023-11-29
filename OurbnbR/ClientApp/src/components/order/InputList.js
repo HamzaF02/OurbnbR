@@ -9,9 +9,10 @@ export const inputlist = [
         name: "customerId",
         label: "CustomerId",
         errormsg: "id must be bigger than 0",
-        type: "select",
+        type: "number",
         required: true,
-        
+        pattern: "^[0-9]{1,10}$",
+        min: 1,
     },
     
     {

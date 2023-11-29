@@ -3,21 +3,18 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { Service } from '../Service';
-import { Select } from '../Select';
 
 
 export default function Update() {
     //State variables to manage form values, loading state and error messages
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(true)
-    const [customers, setCustomers] = useState({});
     //Hooks to extract parameters and for navigation
     const params = useParams()
     const navigate = useNavigate()
   
     const [error, setError] = useState("")
     const api = new Service("rentals")
-
 
 
 
@@ -32,9 +29,8 @@ export default function Update() {
         e.preventDefault();
         console.log(values)
         //Date validation
-        if (values.fromDate > values.toDate) {
+        if (values.fromDate < values.toDate) {
             setError("Dates are not valid")
-            return;
         }
         //A PUT request to update the rental data
         try {
@@ -53,9 +49,7 @@ export default function Update() {
     function handleOnChange(e) {
         const name = e.target.name
         const value = e.target.value
-        //if (name == "ownerId") {value = parseInt(value)}
         setValues({ ...values, [name]: value });
-        console.log()
     }
     //Asych function to fetch rental data from the server and set loading to false once the data is fetched
     async function getRental() {
@@ -70,14 +64,11 @@ export default function Update() {
             <div>
                 <h1>Update Rental</h1>
                 <p>{error}</p>
-                <p>Owner: {values.owner.firstName} {values.owner.lastName}</p>
                 <form onSubmit={handleSubmit}>
-                    {inputlist.map((input) => {
-                        if (input.type != "select")
-                            return <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-                        }
-                    
-                    )}
+                    {inputlist.map((input) => (
+                        <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
+
+                    ))}
                     <button type="submit" className="btn btn-primary" value="Post">Submit</button>
                 </form>
             </div>

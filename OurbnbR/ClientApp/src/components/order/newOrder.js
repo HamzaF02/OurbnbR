@@ -1,12 +1,9 @@
 import { React, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import "./neworder.css"
 import { parseDateTime } from '../../formating';
-import { Service } from '../Service';
-import { Select } from '../Select';
-
 
 
 export function NewOrder() {
@@ -18,6 +15,12 @@ export function NewOrder() {
             customerId: 0, rentalId: 0, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
         });
 
+    // sets values to get info from rental to be displayed to user 
+    const [rental, setRental] = useState(
+        {
+            rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
+        });
+    
     const [rental, setRental] = useState({});
     const [customers, setCustomers] = useState({});
 
@@ -30,9 +33,8 @@ export function NewOrder() {
     
     const [validation, setValidation] = useState("loading");
     const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate()
-    const api = new Service("order")
-    const rentalApi = new Service("rentals")
     
 
     // calls the getrental method
@@ -43,11 +45,9 @@ export function NewOrder() {
     // method checks if rental has id bigger than 0 and gets data from getobjectfromid and get info 
     async function getRental() {
         if (params.id > 0) {
-            setValues({ ...values, ["rentalId"]: params.id });
-            const data = await rentalApi.getObjByid(params.id);
+            const response = await fetch('api/rentals/' + params.id);
+            const data = await response.json();
             setRental(data);
-            const customerList = await rentalApi.customerList();
-            setCustomers(customerList)
             setLoading(false);
 
         }
@@ -65,11 +65,20 @@ export function NewOrder() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const answer = await api.create(values);
+            const rep = await fetch('api/order/create', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(values),
+            });
+
+            const answer = await rep.json();
             console.log("Success: " + answer.success);
             if (answer.success) {
                 navigate("/orders")
             }
+
         } catch (error) {
             console.log("Failed")
         }
@@ -94,16 +103,10 @@ export function NewOrder() {
                     <p className="ptxt">Available To: {parseDateTime(rental.toDate)}</p>
             </div>
             <form onSubmit={handleSubmit}>
-                    {inputlist.map((input) => {
-                    if(input.type == "select"){
-                        return <Select key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} data={customers} />
+                {inputlist.map((input) => (
+                    <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
 
-                    }
-                    else{
-                    return <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-                    }
-                    }
-                    )}
+                ))}
                     <button type="submit" className="btn btn-primary" value="Post">Submit</button>
                 </form>
         </div>

@@ -45,13 +45,8 @@ export class Service {
     
     }
     async getObjByid(id) {
-        const response = await fetch(this.baseURL + "/" + id);
-        const data = await response.json();
-        return data;
+        const response = await fetch(this.baseURL + "/" +id );
+        return await response.json();
     }
-    async customerList() {
-        const response = await fetch("/api/customer");
-        const data = await response.json();
-        return data;
-    }
+
 }

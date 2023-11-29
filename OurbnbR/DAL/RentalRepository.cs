@@ -106,7 +106,7 @@ namespace OurbnbR.DAL
             catch (Exception ex)
             {
                 // failed to update rental
-                _logger.LogError("[RentalRepository] rental Update(rental) failed when updating the Rental {RentalId:0000}, error message: {ex}", rental, ex.Message);
+                _logger.LogError("[RentalRepository] rental FindAync(id) failed when updating the RentalId {RentalId:0000}, error message: {ex}", rental, ex.Message);
                 return false;
             }
         }

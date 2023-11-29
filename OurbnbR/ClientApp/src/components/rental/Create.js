@@ -1,10 +1,9 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
 import "./create.css"
 import { Service } from '../Service';
-import { Select } from '../Select';
 
 // State variable 'values' is implemented useState hook to write values
 export function CreateRental() {
@@ -12,18 +11,11 @@ export function CreateRental() {
             {
                 name: "", price: 0, description: "", image: "",location: "", fromDate: "", toDate: "", ownerId: "", owner: {}
             });
-    const [customers, setCustomers] = useState({});
-    const api = new Service("rental")
-    const [loading,setLoading] = useState(true)
-
-
 
 //Custom hook is  to retrieve error messages
     const errorMessage = useActionData()
 
-    useEffect(() => {
-        getOwners()
-    }, []);
+  
 
  //Event handler (e) function for input changes in the form fields name and value
 
@@ -32,32 +24,21 @@ export function CreateRental() {
             const value = e.target.value
             setValues({ ...values, [name]: value });
         }
-    async function getOwners() {
-        const customerList = await api.customerList();
-        setCustomers(customerList)
-        setLoading(false)
-    }
-
 
        
 
 
-        return ( loading ? <p>loading...</p>:
+        return (
             <div>
               
                 <h1>Create Rental</h1>
                 {errorMessage && errorMessage.error && <p className="text-danger">{errorMessage.error}</p>}
                     <Form method="post" action="/rental/create">
-                    {inputlist.map((input) => {
-                        if (input.type == "select") {
-                            return <Select key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} data={customers} />
+                    {inputlist.map((input) => (
 
-                        }
-                        else {
-                            return <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-                        }
-                    }
-                    )}
+                        <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange}  />
+                            
+                        ))}
 
                     <button type="submit" className="btn btn-primary " value="Post">Submit</button>
                     </Form>

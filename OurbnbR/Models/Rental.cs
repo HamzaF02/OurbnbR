@@ -14,6 +14,7 @@ namespace OurbnbR.Models
         //[StringLength(200)]
         public string? Description { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime FromDate { get; set; }
 
         //[DisplayFormat(DataFormatString = "yyyy-MM-dd")]
