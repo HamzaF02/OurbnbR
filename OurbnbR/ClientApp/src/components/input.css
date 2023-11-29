@@ -1,17 +1,26 @@
 ﻿span {
     color: red;
-    float:right;
     display:none;
+
+}
+
+label {
+    margin-top: 20px;
 }
 
 
 
 input:invalid[focused="true"] ~ span {
     display: block;
+ 
     
 }
 
 input:invalid[focused="true"] {
     border: 2px solid red;
+}
+
+button {
+    margin-top: 30px;
 }
 

@@ -11,7 +11,7 @@ export function CreateRental() {
             });
     const errorMessage = useActionData()
 
-    const [focused, setFocused] = useState(false)
+  
 
         
 
@@ -21,9 +21,7 @@ export function CreateRental() {
             setValues({ ...values, [name]: value });
         }
 
-        function handleFocus(e) {
-            setFocused(true)
-        }
+       
 
 
         return (
@@ -38,7 +36,7 @@ export function CreateRental() {
                             
                         ))}
 
-                    <button type="submit" className="btn btn-primary knapp" value="Post">Submit</button>
+                    <button type="submit" className="btn btn-primary " value="Post">Submit</button>
                     </Form>
                 </div>
         );
