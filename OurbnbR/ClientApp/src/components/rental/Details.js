@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom'
 import { parseDateTime, parseNumber, parsePrice } from '../../formating';
 
 import "./rental.css";
+import { Service } from './Service';
 
 export function Details() {
     const [rental,setRental] = useState();
     const [loading, setLoading] = useState(true)
     const params = useParams()
+    const api = new Service("rentals")
 
     useEffect(() => {
         getRental()
@@ -16,8 +18,7 @@ export function Details() {
 
 
     async function getRental() {
-        const response = await fetch('api/rentals/' + params.id);
-        const data = await response.json();
+        const data = await api.getObjByid(params.id)
         setRental(data);
         setLoading(false);
     }

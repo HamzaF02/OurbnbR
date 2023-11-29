@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 
 import { Card } from './Card';
+import { Service } from './Service';
 
 
 export function Rental() {
@@ -49,6 +50,6 @@ export function Rental() {
 }
 
 export async function getRentals() {
-    const response = await fetch('api/rentals/');
-    return await response.json();
+    const api = new Service("rentals")
+    return await api.getAll()
 }

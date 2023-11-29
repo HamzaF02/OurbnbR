@@ -74,6 +74,6 @@ export const inputlist = [
         label: "Location",
         type: "text",
         required: true,
-        pattern: "^[A-Za-z0-9]{2,50}$",
+        pattern: "^[A-Za-z0-9 ]{2,50}$",
     },
 ]

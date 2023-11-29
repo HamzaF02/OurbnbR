@@ -3,6 +3,7 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
 import "./create.css"
+import { Service } from './Service';
 
 
 export function CreateRental() {
@@ -46,6 +47,7 @@ export function CreateRental() {
 
 export const rentalCreateAction = async ({request}) => {
     const data = await request.formData()
+    const api = new Service("rentals")
     const values = {
         name: data.get("name"), price: data.get("price"), description: data.get("description"), image: data.get("image"), location: data.get("location"), fromDate: data.get("fromDate"), toDate: data.get("toDate"), ownerId: data.get("ownerId"), owner: { }
     }
@@ -55,14 +57,8 @@ export const rentalCreateAction = async ({request}) => {
         return { error: "Dates are not valid" }
     }
     try {
-        const rep = await fetch('api/rentals/create', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(values),
-        });
-        const answer = await rep.json();
+
+        const answer = await api.create(values)
         if (answer && answer.success) {
             console.log("Success: " + answer.success);
             return redirect('/rental')

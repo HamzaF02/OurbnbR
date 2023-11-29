@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
+import { Service } from './Service';
 
 
 export default function Update() {
@@ -11,7 +12,9 @@ export default function Update() {
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
-    const [error,setError] = useState("")
+    const [error, setError] = useState("")
+    const api = new Service("rentals")
+
 
 
 
@@ -27,15 +30,7 @@ export default function Update() {
         }
 
         try {
-            const rep = await fetch('api/rentals/update', {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(values),
-            });
-
-            const answer = await rep.json();
+            const answer = await api.update(values)
             console.log("Success: " + answer.success);
             if (answer.success) {
                 navigate("/rental")
@@ -53,8 +48,7 @@ export default function Update() {
     }
 
     async function getRental() {
-        const response = await fetch('api/rentals/' + params.id);
-        const data = await response.json();
+        const data = await api.getObjByid(params.id)
         setValues(data); setLoading(false);
     }
 

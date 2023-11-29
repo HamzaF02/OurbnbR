@@ -1,10 +1,10 @@
 
-export class rentalService {
+export class Service {
     constructor(baseURL) {
-        this.baseURL = baseURL;
+        this.baseURL = "/api/"+baseURL;
     }
     async create(obj) {
-        const rep = await fetch(this.baseURL + ' create', {
+        const rep = await fetch(this.baseURL + '/create', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -16,7 +16,7 @@ export class rentalService {
     }
 
     async update(obj) {
-        const rep = await fetch(this.baseURL + 'update', {
+        const rep = await fetch(this.baseURL + '/update', {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +27,7 @@ export class rentalService {
         return answer
     }
     async delete(id) {
-        const rep = await fetch(this.baseURL + 'delete/' + id, {
+        const rep = await fetch(this.baseURL + '/delete/' + id, {
             method: 'Delete',
             headers: {
                 "Content-Type": "application/json"
@@ -38,13 +38,14 @@ export class rentalService {
         const answer = await rep.json();
         return answer
     }
-    async GetAll() {
+    async getAll() {
         const response = await fetch(this.baseURL);
-        return await response.json();
+        const data = await response.json()
+        return data;
     
     }
-    async GetObjByid(id) {
-        const response = await fetch(this.baseURL + id );
+    async getObjByid(id) {
+        const response = await fetch(this.baseURL + "/" +id );
         return await response.json();
     }
 
