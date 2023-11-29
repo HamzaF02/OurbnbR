@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
+import "./create.css"
 
 
 export function CreateRental() {
