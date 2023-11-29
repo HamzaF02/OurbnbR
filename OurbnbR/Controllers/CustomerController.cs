@@ -27,19 +27,22 @@ namespace OurbnbR.Controllers
             _logger = logger;
         }
 
-
+        // method to get all customers   
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            // gets all customers
             var customers = await _repository.GetAll();
             if (customers == null)
             {
+                // if there are no customer 
                 _logger.LogError("[CustomerController] customer list not found while executing _Crepository.GetAll()");
                 return NotFound("Customer list not found");
             }
             return Ok(customers);
         }
 
+      
         [HttpGet("{id}")]
         public async Task<IActionResult> GetItemById(int id)
         {
@@ -61,33 +64,42 @@ namespace OurbnbR.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Customer customer)
         {
+            // if everything is valid we create a customer
             if (ModelState.IsValid)
             {
+                // we insert customer to db and if it went ok we return success
                 bool ok = await _repository.Create(customer);
                 if (ok) return Ok(new ServerResponse { success = true, message = "Customer created"});
             }
+            // if not we return badrequest
             return BadRequest("Customer creation failed");
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(Customer customer)
         {
+            // if everything is valid we update a customer
             if (ModelState.IsValid)
             {
+                // we insert updated info of customer to db and if it went ok we return success
                 bool ok = await _repository.Update(customer);
                 if (ok) return Ok(new ServerResponse { success = true, message = "Customer updated" });
             }
+            // if not we return badrequest
             return BadRequest("Customer update failed");
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
+            // if everything is valid we delete a customer
             if (ModelState.IsValid)
             {
+                // we delete customer from db and if it went ok we return success
                 bool ok = await _repository.Delete(id);
                 if (ok) return Ok(new ServerResponse { success = true, message = "Customer deleted" });
             }
+            // if not we return badrequest
             return BadRequest("Customer deletion failed");
         }
     }

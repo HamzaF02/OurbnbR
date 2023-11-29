@@ -30,10 +30,13 @@ namespace OurbnbR.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-           var orders = await _repository.GetAll();
-           if (orders == null)
+            //Gets all orders
+            var orders = await _repository.GetAll();
+            //Checks if there was a no orders
+            if (orders == null)
            {
-               _logger.LogError("[OrderController] Order list not found while executing _repository.GetAll()");
+                // returns error notfound
+                _logger.LogError("[OrderController] Order list not found while executing _repository.GetAll()");
                return NotFound("Order list not found");
            }
            return Ok(orders);
@@ -45,9 +48,10 @@ namespace OurbnbR.Controllers
             //Gets current order
             var order = await _repository.getObjectById(id);
 
-            //Checks if there was a problem
+            //Checks if there was a no order with this id
             if (order == null)
             {
+                // returns error notfound
                 _logger.LogError("[OrderController] Order not found for the orderId {orderId:0000}", id);
                 return NotFound("Order not found for the orderId");
             }

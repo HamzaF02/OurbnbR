@@ -26,8 +26,6 @@ export function CreateRental() {
         }
 
        
-
-
         return (
             <div>
               

@@ -28,12 +28,13 @@ export default function UpdateOrder() {
             if (answer.success) {
                 navigate("/orders")
             }
-
+        // error shows that it failed to post to db
         } catch (error) {
             console.log("Failed")
         }
     }
 
+    // 
     function handleOnChange(e) {
         const name = e.target.name
         const value = e.target.value
