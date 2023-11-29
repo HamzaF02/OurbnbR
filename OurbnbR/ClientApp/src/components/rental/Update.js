@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
-import { Service } from './Service';
+import { Service } from '../Service';
 
 
 export default function Update() {

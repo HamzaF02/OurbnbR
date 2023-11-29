@@ -3,7 +3,7 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
 import "./create.css"
-import { Service } from './Service';
+import { Service } from '../Service';
 
 // State variable 'values' is implemented useState hook to write values
 export function CreateRental() {

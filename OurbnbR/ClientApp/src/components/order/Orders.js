@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './orders.css';
 import { parseDateTime, parseNumber, parsePrice } from '../../formating';
+import { Service } from "../Service"
 
 
 export function Orders() {
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState(true)
+    const api = new Service ("order")
     
 
     useEffect(() => {
@@ -15,8 +17,7 @@ export function Orders() {
 
 
     async function getOrders() {
-        const response = await fetch('api/order/');
-        const data = await response.json();
+        const data = await api.getAll()
         setOrders(data);
         setLoading(false);
     }

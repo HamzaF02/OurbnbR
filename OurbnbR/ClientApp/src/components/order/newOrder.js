@@ -22,6 +22,7 @@ export function NewOrder() {
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate()
+    
 
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { parseDateTime, parseNumber, parsePrice } from '../../formating';
 
 import "./rental.css";
-import { Service } from './Service';
+import { Service } from '../Service';
 
 export function Details() {
     //Stating variables to manage the rental data and loading state. 

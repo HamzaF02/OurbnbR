@@ -3,7 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 
 import { Card } from './Card';
-import { Service } from './Service';
+import { Service } from '../Service';
 
 //Function with custom hook to load rental Data and search useState to load searching rentals
 export function Rental() {
