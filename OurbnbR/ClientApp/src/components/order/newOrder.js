@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import "./neworder.css"
+import { parseDateTime } from '../../formating';
 
 
 export function NewOrder() {
@@ -12,44 +13,35 @@ export function NewOrder() {
             customerId: 0, rentalId: 0, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
         });
 
-    const [rentalvalues, getValues] = useState(
+    const [rental, setRental] = useState(
         {
             rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
         });
 
 
     const [valid, setValid] = useState(true);
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate()
 
 
     useEffect(() => {
-        setRental()
         getRental()
- 
     }, []);
 
-    function setRental() {
 
+    async function getRental() {
         if (params.id > 0) {
+            const response = await fetch('api/rentals/' + params.id);
+            const data = await response.json();
+            setRental(data);
+            setLoading(false);
             setValid(false)
-            setValues({ ...values, rentalId: params.id });
 
+            console.log(data)
         }
-        
     }
 
-    function getRental() {
-
-        if (params.id > 0) {
-            setValid(false)
-            getValues({ ...values, rentalId: params.id });
-
-        }
-
-
-
-    }
-   
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -81,13 +73,13 @@ export function NewOrder() {
 
 
     return (
-        valid ? <p>Invalid</p>: 
+        valid && loading ? <p>Invalid</p>: 
         <div>
             <h1>Create Order</h1>
                 <div className="rentalInfo">
-                    <p className="ptxt"> Name of Rental: {rentalvalues[params.name]}</p>
-                    <p className="ptxt">From date:</p>
-                    <p className="ptxt">To date:</p>
+                    <p className="ptxt"> Name of Rental: {rental.name}</p>
+                    <p className="ptxt">Available From: {parseDateTime(rental.fromDate)}</p>
+                    <p className="ptxt">Available To: {parseDateTime(rental.toDate)}</p>
             </div>
             <form onSubmit={handleSubmit}>
                 {inputlist.map((input) => (
