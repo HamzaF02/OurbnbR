@@ -1,5 +1,8 @@
+//gets todays date
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + "T00:00:00";
+
+//get what input is allowed with regex for each input
 export const inputlist = [
     {
         id: 1,
