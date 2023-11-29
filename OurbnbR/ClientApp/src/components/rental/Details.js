@@ -6,15 +6,18 @@ import { parseDateTime, parseNumber, parsePrice } from '../../formating';
 import "./rental.css";
 
 export function Details() {
+    //Stating variables to manage the rental data and loading state. 
+    //Params is used to extract parameters from the URL
     const [rental,setRental] = useState();
     const [loading, setLoading] = useState(true)
     const params = useParams()
-
+    //Useffect hook is used to do something after being rendered,
+    //In this case, to get rentals. 
     useEffect(() => {
         getRental()
     }, []);
 
-
+    //Asynchrous function to get the rental details
     async function getRental() {
         const response = await fetch('api/rentals/' + params.id);
         const data = await response.json();

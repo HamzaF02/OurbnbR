@@ -4,7 +4,7 @@ import "./rental.css";
 
 import { Card } from './Card';
 
-
+//Function with custom hook to load rental Data and search useState to load searching rentals
 export function Rental() {
     const rentals = useLoaderData();
     const [search, setSearch] = useState('')
@@ -48,6 +48,7 @@ export function Rental() {
     );
 }
 
+// Asynchronous function to fetch a list of rentals and parse the JSON response from the server
 export async function getRentals() {
     const response = await fetch('api/rentals/');
     return await response.json();

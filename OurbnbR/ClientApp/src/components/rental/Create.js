@@ -4,17 +4,19 @@ import { inputlist } from './InputList';
 import { redirect, Form, useActionData } from 'react-router-dom'
 import "./create.css"
 
-
+// State variable 'values' is implemented useState hook to write values
 export function CreateRental() {
         const [values, setValues] = useState(
             {
                 name: "", price: 0, description: "", image: "",location: "", fromDate: "", toDate: "", ownerId: "", owner: {}
             });
+
+//Custom hook is  to retrieve error messages
     const errorMessage = useActionData()
 
   
 
-        
+ //Event handler (e) function for input changes in the form fields name and value
 
         function handleOnChange(e) {
             const name = e.target.name
