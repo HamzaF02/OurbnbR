@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 
+
 export function NewOrder() {
     const params = useParams();
     const [values, setValues] = useState(
