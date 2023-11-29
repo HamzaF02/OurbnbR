@@ -6,18 +6,16 @@ import { Service } from "../Service"
 
 
 export function Orders() {
-
-    // use of usestate for order attributes and api service injection 
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState(true)
     const api = new Service ("order")
     
-    // calls getOrders method
+
     useEffect(() => {
         getOrders()
     }, []);
 
-    // gets all the orders from db 
+
     async function getOrders() {
         const data = await api.getAll()
         setOrders(data);
@@ -27,7 +25,8 @@ export function Orders() {
    
     
     
-    // html for orderslist
+    
+  
     return (
         loading ? <p>loading...</p> :
             <div>

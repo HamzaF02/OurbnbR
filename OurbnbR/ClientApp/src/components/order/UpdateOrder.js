@@ -7,19 +7,19 @@ import { Service } from "../Service"
 
 
 export default function UpdateOrder() {
-    // service injection and usestates that gets used to update order
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState(
+        {
+        });
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
     const api = new Service("order")
    
-    // method to get order
+
     useEffect(() => {
         getOrder()
     }, []);
 
-    // method when submiting an updated order
     async function handleSubmit(e) {
         e.preventDefault();
         try {
@@ -40,13 +40,12 @@ export default function UpdateOrder() {
         setValues({ ...values, [name]: value });
     }
 
-    // gets order by id and sets values from data 
     async function getOrder() {
         const data = await api.getObjByid(params.id)
         setValues(data); setLoading(false);
     }
 
-    // html for update order
+
     return (
 
         loading ? <p>loading...</p> :
