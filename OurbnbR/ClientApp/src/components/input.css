@@ -5,7 +5,13 @@
 }
 
 
-:invalid ~ span{
-    display:block;
+
+input:invalid[focused="true"] ~ span {
+    display: block;
+    
+}
+
+input:invalid[focused="true"] {
+    border: 2px solid red;
 }
 

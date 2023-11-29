@@ -9,8 +9,9 @@ export function CreateRental() {
             {
                 name: "", price: 0, description: "", image: "",location: "", fromDate: "", toDate: "", ownerId: "", owner: {}
             });
-        const errorMessage = useActionData()
-        
+    const errorMessage = useActionData()
+
+    const [focused, setFocused] = useState(false)
 
         
 
@@ -18,6 +19,10 @@ export function CreateRental() {
             const name = e.target.name
             const value = e.target.value
             setValues({ ...values, [name]: value });
+        }
+
+        function handleFocus(e) {
+            setFocused(true)
         }
 
 
@@ -28,8 +33,8 @@ export function CreateRental() {
                 {errorMessage && errorMessage.error && <p className="text-danger">{errorMessage.error}</p>}
                     <Form method="post" action="/rental/create">
                     {inputlist.map((input) => (
-                   
-                            <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
+
+                        <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange}  />
                             
                         ))}
 
