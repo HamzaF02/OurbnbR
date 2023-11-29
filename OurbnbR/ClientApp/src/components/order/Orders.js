@@ -67,7 +67,7 @@ export function Orders() {
                     </tbody>
                 </table>
             </div>
-            {/* <button className="btn btn-outline-info info" style={{ marginTop: '30px' }} onClick={() => onGoBackHome()}>Go back Home</button>*/}
+            
         </div>
     );
   

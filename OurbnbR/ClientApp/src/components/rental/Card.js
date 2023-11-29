@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import "./card.css";
 import { parseNumber, parsePrice } from "../../formating"
 
+
+
+// A function that returns a card design that showcases each rental. 
 export function Card({ rental }) {
     return (
         <Link className="link-dark" to={"/rental/details/" + rental.rentalId}>
