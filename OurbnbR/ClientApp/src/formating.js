@@ -10,5 +10,6 @@ const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","No
 
 export function parseDateTime(date) {
     var output = new Date(date.split("T")[0])
-    return output.getDay() + " " + months[output.getMonth()-1] + " " + output.getFullYear()
+    var str = output.getDate() + " " + months[output.getMonth()] + " " + output.getFullYear()
+    return str
 }
