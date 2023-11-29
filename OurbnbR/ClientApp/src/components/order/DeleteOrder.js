@@ -1,25 +1,19 @@
 ﻿
 import { React } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
+import { Service } from "../Service"
 
 export function DeleteOrder() {
 
     const params = useParams()
     const navigate = useNavigate()
-
-
+    const api = new Service("order")
     async function deleteConfirmed() {
         //this try fetches the correct Order from the api and tries to delete it
         try {
-            const rep = await fetch('api/order/delete/' + params.id, {
-                method: 'Delete',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(params.id)
-            });
+            
             //answer waits for the json reply
-            const answer = await rep.json();
+            const answer = await api.delete(params.id)
             console.log(answer);
             //navigates to orders page if the deletion was seccessfull
             if (answer.success) {

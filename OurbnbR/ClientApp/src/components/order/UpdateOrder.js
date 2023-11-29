@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import './orders.css';
+import { Service } from "../Service"
 
 
 export default function UpdateOrder() {
@@ -12,6 +13,8 @@ export default function UpdateOrder() {
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
+    const api = new Service("order")
+   
 
     useEffect(() => {
         getOrder()
@@ -20,15 +23,7 @@ export default function UpdateOrder() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const rep = await fetch('api/order/update', {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(values),
-            });
-
-            const answer = await rep.json();
+            const answer = await api.update(values);
             console.log("Success: " + answer.success);
             if (answer.success) {
                 navigate("/orders")
@@ -46,8 +41,7 @@ export default function UpdateOrder() {
     }
 
     async function getOrder() {
-        const response = await fetch('api/order/' + params.id);
-        const data = await response.json();
+        const data = await api.getObjByid(params.id)
         setValues(data); setLoading(false);
     }
 
