@@ -9,7 +9,6 @@ export default function Update() {
     //State variables to manage form values, loading state and error messages
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState("")
     //Hooks to extract parameters and for navigation
     const params = useParams()
     const navigate = useNavigate()
