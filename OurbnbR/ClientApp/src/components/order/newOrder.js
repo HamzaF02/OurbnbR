@@ -4,6 +4,7 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import "./neworder.css"
 import { parseDateTime } from '../../formating';
+import { Service } from '../Service';
 
 
 export function NewOrder() {
@@ -23,8 +24,12 @@ export function NewOrder() {
     
     const [validation, setValidation] = useState("loading");
     const [loading, setLoading] = useState(true);
+    const [error,setError] = useState("")
 
     const navigate = useNavigate()
+    const api = new Service("order")
+    const rentalapi = new Service("rentals")
+    
     
 
     // calls the getrental method
@@ -35,12 +40,10 @@ export function NewOrder() {
     // method checks if rental has id bigger than 0 and gets data from getobjectfromid and get info 
     async function getRental() {
         if (params.id > 0) {
-            const response = await fetch('api/rentals/' + params.id);
-            const data = await response.json();
+            const data = await rentalapi.getObjByid(params.id);
             setRental(data);
             setLoading(false);
             setValues({ ...values, rentalId: params.id });
-
         }
 
         else {
@@ -56,24 +59,18 @@ export function NewOrder() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const rep = await fetch('api/order/create', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(values),
-            });
-
-            const answer = await rep.json();
+            const answer = await api.create(values);
             console.log("Success: " + answer.success);
 
             // if it gets posted user gets sent to orders
             if (answer.success) {
                 navigate("/orders")
             }
-        // error shows that it failed to post
+            // error shows that it failed to post
+            setError("Server failure: " + answer.message)
         } catch (error) {
-            console.log("Failed")
+            console.log("Failed" + error.message)
+            setError(error.message)
         }
     }
 
@@ -94,7 +91,8 @@ export function NewOrder() {
                     <p className="ptxt"> Name of Rental: {rental.name}</p>
                     <p className="ptxt">Available From: {parseDateTime(rental.fromDate)}</p>
                     <p className="ptxt">Available To: {parseDateTime(rental.toDate)}</p>
-            </div>
+                </div>
+                <p>{error}</p>
             <form onSubmit={handleSubmit}>
                 {inputlist.map((input) => (
                     <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
