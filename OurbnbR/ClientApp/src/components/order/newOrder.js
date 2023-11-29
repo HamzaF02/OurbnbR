@@ -8,20 +8,12 @@ import { parseDateTime } from '../../formating';
 
 export function NewOrder() {
     const params = useParams();
+
+    // sets values to make an order
     const [values, setValues] = useState(
         {
             customerId: 0, rentalId: 0, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
         });
-
-    const [rental, setRental] = useState(
-        {
-            rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
-        });
-<<<<<<< HEAD
-    
-    const [rental, setRental] = useState({});
-    const [customers, setCustomers] = useState({});
-
 
     // sets values to get info from rental to be displayed to user 
     const [rental, setRental] = useState(
@@ -29,21 +21,18 @@ export function NewOrder() {
             rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
         });
     
-=======
-
->>>>>>> parent of 8bc75a0 (order comments)
     const [validation, setValidation] = useState("loading");
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate()
     
 
-
+    // calls the getrental method
     useEffect(() => {
         getRental()
     }, []);
 
-
+    // method checks if rental has id bigger than 0 and gets data from getobjectfromid and get info 
     async function getRental() {
         if (params.id > 0) {
             const response = await fetch('api/rentals/' + params.id);
@@ -52,13 +41,17 @@ export function NewOrder() {
             setLoading(false);
 
         }
+
         else {
             setValidation("Invalid parameter")
         }
 
     }
 
-
+    // method whem submiting data to database
+    // we use a post method to create order
+    // and gets rederected to orders
+    // shows if it failed to post
     async function handleSubmit(e) {
         e.preventDefault();
         try {
@@ -72,22 +65,25 @@ export function NewOrder() {
 
             const answer = await rep.json();
             console.log("Success: " + answer.success);
+
+            // if it gets posted user gets sent to orders
             if (answer.success) {
                 navigate("/orders")
             }
-
+        // error shows that it failed to post
         } catch (error) {
             console.log("Failed")
         }
     }
 
+    // sets values of the data from the input form
     function handleOnChange(e) {
         const name = e.target.name
         const value = e.target.value
         setValues({ ...values, [name]: value });
     }
 
-
+    // html for create order
     return (
         loading ? <p>{validation}</p> : 
 
