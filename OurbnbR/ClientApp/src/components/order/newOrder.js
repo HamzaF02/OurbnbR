@@ -18,9 +18,8 @@ export function NewOrder() {
             rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
         });
 
-
-    const [valid, setValid] = useState(true);
-    const [loading, setLoading] = useState(false);
+    const [validation, setValidation] = useState("loading");
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate()
 
@@ -36,10 +35,12 @@ export function NewOrder() {
             const data = await response.json();
             setRental(data);
             setLoading(false);
-            setValid(false)
 
-            console.log(data)
         }
+        else {
+            setValidation("Invalid parameter")
+        }
+
     }
 
 
@@ -73,7 +74,8 @@ export function NewOrder() {
 
 
     return (
-        valid && loading ? <p>Invalid</p>: 
+        loading ? <p>{validation}</p> : 
+
         <div>
             <h1>Create Order</h1>
                 <div className="rentalInfo">
