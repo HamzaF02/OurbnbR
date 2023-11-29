@@ -1,5 +1,5 @@
 var today = new Date();
-var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()+"T00:00:00";
+var date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate()+"T00:00:00";
 export const inputlist = [
     {
         id: 1,
@@ -63,9 +63,8 @@ export const inputlist = [
         name: "ownerId",
         errormsg: "Ownerid must be a positive number",
         label: "OwnerId",
-        type: "number",
-        required: true,
-        min: 0,
+        type: "select",
+        
     },
     {
         id: 8,

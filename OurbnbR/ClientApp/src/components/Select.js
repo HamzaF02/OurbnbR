@@ -14,7 +14,7 @@ export function Select({ value, name, label, errormsg, data, OnChange, ...Other 
         < div className = "form-group" >
                
             <label htmlFor={name}>{label}: </label>
-            <select value={value} name={name} onChange={OnChange} onBlur={handleFocus} focused={focused.toString()} className="form-control" {...Other}>
+            <select value={value} name={name} onChange={OnChange} className="form-control" {...Other}>
                 {data.map((i) => (
                     <option key={i.customerId} value={i.customerId}>{i.customerId}: {i.firstName} {i.lastName}</option>
                 ))}

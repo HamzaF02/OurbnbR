@@ -4,6 +4,8 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import './orders.css';
 import { Service } from "../Service"
+import { parseDateTime } from '../../formating';
+import { Select } from '../Select';
 
 
 export default function UpdateOrder() {
@@ -13,6 +15,8 @@ export default function UpdateOrder() {
     const params = useParams()
     const navigate = useNavigate()
     const api = new Service("order")
+    const [customers, setCustomers] = useState({});
+
    
     // method to get order
     useEffect(() => {
@@ -43,7 +47,10 @@ export default function UpdateOrder() {
     // gets order by id and sets values from data 
     async function getOrder() {
         const data = await api.getObjByid(params.id)
+        const customerList = await api.customerList();
+        setCustomers(customerList)
         setValues(data); setLoading(false);
+       
     }
 
     // html for update order
@@ -52,11 +59,22 @@ export default function UpdateOrder() {
         loading ? <p>loading...</p> :
             <div>
                 <h1>Update Order</h1>
+                <div className="rentalInfo">
+                    <p className="ptxt"> Name of Rental: {values.rental.name}</p>
+                    <p className="ptxt">Available From: {parseDateTime(values.rental.fromDate)}</p>
+                    <p className="ptxt">Available To: {parseDateTime(values.rental.toDate)}</p>
+                </div>
                 <form onSubmit={handleSubmit}>
-                    {inputlist.map((input) => (
-                        <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
+                    {inputlist.map((input) => {
+                        if (input.type == "select") {
+                            return <Select key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} data={customers} />
 
-                    ))}
+                        }
+                        else {
+                            return <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
+                        }
+                    }
+                    )}
                     <button type="submit" className="btn btn-primary submitUpdate" value="Post">Submit</button>
                 </form>
             </div>
