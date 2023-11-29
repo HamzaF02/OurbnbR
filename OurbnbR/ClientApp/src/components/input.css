@@ -16,9 +16,7 @@ input:invalid[focused="true"] ~ span {
     
 }
 
-input:valid[focused="true"] {
-    border: 2px solid green;
-}
+
 
 input:invalid[focused="true"] {
     border: 2px solid red;

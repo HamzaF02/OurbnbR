@@ -1,0 +1,12 @@
+﻿.rentalInfo {
+    border: 2px solid black;
+    padding: 20px 20px 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+   
+}
+
+.ptxt {
+    display: inline-block;
+    margin-right:30px;
+}
