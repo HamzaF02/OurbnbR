@@ -12,7 +12,6 @@ export default function Update() {
     //Hooks to extract parameters and for navigation
     const params = useParams()
     const navigate = useNavigate()
-  
     const [error, setError] = useState("")
     const api = new Service("rentals")
 

@@ -41,7 +41,7 @@ namespace OurbnbR.DAL
                         Address="Pilestredet 35",
                         Phone=47782356,
                         Email="Oslo@gmail.com"
-                    },
+                    }
 
 
                 };
@@ -66,7 +66,7 @@ namespace OurbnbR.DAL
                         FromDate=new DateTime(2023, 10, 27),
                         ToDate=new DateTime(2023, 11, 30),
                         Image = "/images/hytteNordkapp.jpg",
-                        Rating=3,
+                        Rating=3
                     },
                     new Rental
                     {
@@ -78,7 +78,7 @@ namespace OurbnbR.DAL
                         Location = "Gran",
                         Price = 150,
                         Image = "/images/HouseWater.jpeg",
-                        OwnerId = 2,
+                        OwnerId = 2
                     },
                     new Rental
                     {
