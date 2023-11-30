@@ -171,7 +171,7 @@ namespace OurbnbR.Controllers
                 {
                     //Logs error and returns view with message
                     _logger.LogError("dates for order are invalid");
-                    return BadRequest("Dates not valid");
+                    return BadRequest("Dates not valid KK");
                 }
                 //Repository updates and checks it
                 bool ok = await _repository.Update(newOrder);

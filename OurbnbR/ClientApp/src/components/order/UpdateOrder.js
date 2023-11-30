@@ -4,16 +4,24 @@ import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import './orders.css';
 import { Service } from "../Service"
+import { parseDateTime } from '../../formating';
 
 
 export default function UpdateOrder() {
     const [values, setValues] = useState(
         {
         });
+
+    // sets values to get info from rental to be displayed to user 
+    const [rental, setRental] = useState(
+        {
+            rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
+        });
     const [loading, setLoading] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
     const api = new Service("order")
+  
    
 
     useEffect(() => {
@@ -22,6 +30,9 @@ export default function UpdateOrder() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        console.log(values)
+        values.to += ":00"
+        values.from += ":00"
         try {
             const answer = await api.update(values);
             console.log("Success: " + answer.success);
@@ -43,6 +54,7 @@ export default function UpdateOrder() {
 
     async function getOrder() {
         const data = await api.getObjByid(params.id)
+        console.log(data)
         setValues(data); setLoading(false);
     }
 
@@ -52,6 +64,11 @@ export default function UpdateOrder() {
         loading ? <p>loading...</p> :
             <div>
                 <h1>Update Order</h1>
+                <div className="rentalInfo">
+                    <p className="ptxt"> Name of Rental: {values.rental.name}</p>
+                    <p className="ptxt">Available From: {parseDateTime(values.rental.fromDate)}</p>
+                    <p className="ptxt">Available To: {parseDateTime(values.rental.toDate)}</p>
+                </div>
                 <form onSubmit={handleSubmit}>
                     {inputlist.map((input) => (
                         <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />

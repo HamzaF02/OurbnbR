@@ -40,6 +40,8 @@ export const inputlist = [
         required: true,
         min: date
 
+
+
     },
     {
         id: 5,
