@@ -30,6 +30,7 @@ export default function Update() {
         //Date validation
         if (values.fromDate > values.toDate) {
             setError("Dates are not valid")
+            return;
         }
         //A PUT request to update the rental data
         try {
@@ -52,24 +53,24 @@ export default function Update() {
         const value = e.target.value
         setValues({ ...values, [name]: value });
     }
-    //Asych function to fetch rental data from the server and set loading to false once the data is fetched
+    //Async function to fetch rental data from the server and set loading to false once the data is fetched
     async function getRental() {
         const data = await api.getObjByid(params.id)
         setValues(data); setLoading(false);
     }
 
-
+    //Made it so that a user is unable to change the owner 
     return (
 
         loading ? <p>loading...</p> :
             <div>
                 <h1>Update Rental</h1>
                 <p>{error}</p>
+                <p>Owner: {values.owner.firstName} {values.owner.lastName}</p>
                 <form onSubmit={handleSubmit}>
-                    {inputlist.map((input) => (
-                        <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-
-                    ))}
+                    {inputlist.map((input) => {
+                        if (input.name != "ownerId") { return <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} /> }
+                    })}
                     <button type="submit" className="btn btn-primary" value="Post">Submit</button>
                 </form>
             </div>

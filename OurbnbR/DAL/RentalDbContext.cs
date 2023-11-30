@@ -16,7 +16,8 @@ namespace OurbnbR.DAL
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseLazyLoadingProxies();
+			optionsBuilder.EnableSensitiveDataLogging();
+            optionsBuilder.UseLazyLoadingProxies();
 		}
 	}
 }

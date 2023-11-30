@@ -60,6 +60,7 @@ export function NewOrder() {
         e.preventDefault();
         if (values.from > values.to) {
             setError("Dates are not valid")
+            return;
         }
         try {
             const answer = await api.create(values);

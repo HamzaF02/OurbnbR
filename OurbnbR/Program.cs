@@ -25,6 +25,8 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
 builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
 builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
 builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
+builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
+
 
 var loggerConfiguration = new LoggerConfiguration()
     .MinimumLevel.Information() // levels: Trace< Information < Warning < Erorr < Fatal

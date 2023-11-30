@@ -18,6 +18,7 @@ export default function UpdateOrder() {
             rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
         });
     const [loading, setLoading] = useState(true)
+    const [error,setError] = useState("")
     const params = useParams()
     const navigate = useNavigate()
     const api = new Service("order")
@@ -30,9 +31,13 @@ export default function UpdateOrder() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(values)
+        if (values.from > values.to) {
+            setError("Dates are not valid")
+            return;
+        }
         values.to += ":00"
         values.from += ":00"
+
         try {
             const answer = await api.update(values);
             console.log("Success: " + answer.success);
@@ -41,7 +46,8 @@ export default function UpdateOrder() {
             }
         // error shows that it failed to post to db
         } catch (error) {
-            console.log("Failed")
+            console.log("Failed" + error.message)
+            setError(error.message)
         }
     }
 
@@ -69,10 +75,10 @@ export default function UpdateOrder() {
                     <p className="ptxt">Available From: {parseDateTime(values.rental.fromDate)}</p>
                     <p className="ptxt">Available To: {parseDateTime(values.rental.toDate)}</p>
                 </div>
+                <p>{error}</p>
                 <form onSubmit={handleSubmit}>
                     {inputlist.map((input) => (
                         <Inputs key={input.id} value={values[input.name]} {...input} OnChange={handleOnChange} />
-
                     ))}
                     <button type="submit" className="btn btn-primary submitUpdate" value="Post">Submit</button>
                 </form>

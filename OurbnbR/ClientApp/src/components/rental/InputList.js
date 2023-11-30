@@ -67,7 +67,7 @@ export const inputlist = [
         label: "OwnerId",
         type: "number",
         required: true,
-        min: 0,
+        min: 1,
     },
     {
         id: 8,
