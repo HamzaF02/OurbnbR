@@ -58,6 +58,9 @@ export function NewOrder() {
     // shows if it failed to post
     async function handleSubmit(e) {
         e.preventDefault();
+        if (values.from > values.to) {
+            setError("Dates are not valid")
+        }
         try {
             const answer = await api.create(values);
             console.log("Success: " + answer.success);
