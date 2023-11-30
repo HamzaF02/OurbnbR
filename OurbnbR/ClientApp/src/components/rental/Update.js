@@ -24,7 +24,7 @@ export default function Update() {
         //Async function to fetch rental data from the server and set loading to false once the data is fetched
         const getRental = async () => {
 
-            const data = await api.getObjById(params.id);
+            const data = await api.getObjByid(params.id);
             setValues(data);
             setLoading(false);
         }

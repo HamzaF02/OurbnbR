@@ -14,7 +14,7 @@ export function NewOrder() {
     // sets values to make an order
     const [values, setValues] = useState(
         {
-            customerId: 0, rentalId: 0, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
+            customerId: 0, rentalId: params.id, rating: 0, from: "", to: "", rental: { owner: {} }, customer: {}, totalPrice: 0,
         });
 
     // sets values to get info from rental to be displayed to user 
@@ -29,7 +29,7 @@ export function NewOrder() {
 
     const navigate = useNavigate()
    
-    setValues({ ...values, rentalId: params.id });
+    
     
 
     // calls the getrental method

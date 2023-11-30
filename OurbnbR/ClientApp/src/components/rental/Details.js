@@ -20,7 +20,7 @@ export function Details() {
     useEffect(() => {
         const getRental = async () => {
             //Asynchrous function to get the rental details
-            const data = await api.getObjById(params.id);
+            const data = await api.getObjByid(params.id);
             setRental(data);
             setLoading(false);
         }

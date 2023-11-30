@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
 import { Card } from './Card';

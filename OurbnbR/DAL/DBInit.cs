@@ -11,7 +11,7 @@ namespace OurbnbR.DAL
             using var serviceScope = app.ApplicationServices.CreateScope();
             RentalDbContext context = serviceScope.ServiceProvider.GetRequiredService<RentalDbContext>();
             //Creates and delets database content
-           //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
 
@@ -31,13 +31,18 @@ namespace OurbnbR.DAL
 
 
                     },
-                   
-                       
-
                     new Customer
                     {
                         FirstName="Mahdi",
                         LastName="Ibbi",
+                        Address="Pilestredet 35",
+                        Phone=47782356,
+                        Email="Oslo@gmail.com"
+                    },
+                    new Customer
+                    {
+                        FirstName="Harki",
+                        LastName="boom",
                         Address="Pilestredet 35",
                         Phone=47782356,
                         Email="Oslo@gmail.com"
