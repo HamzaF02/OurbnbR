@@ -29,7 +29,7 @@ export default function Update() {
         e.preventDefault();
         console.log(values)
         //Date validation
-        if (values.fromDate < values.toDate) {
+        if (values.fromDate > values.toDate) {
             setError("Dates are not valid")
         }
         //A PUT request to update the rental data
@@ -41,8 +41,10 @@ export default function Update() {
                 navigate("/rental")
             }
             //Handling erros
+            setError(answer.message)
         } catch (error) {
-            console.log("Failed")
+            console.log("Failed: " + error.message)
+            setError(error.message)
         }
     }
     // Event hanlding function for input changes in the form fields
