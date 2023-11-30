@@ -1,7 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import "./rental.css";
-
 import { Card } from './Card';
 import { Service } from '../Service';
 
@@ -31,7 +30,7 @@ export function Rental() {
                 {rentals.filter((rental) => {
                     return search.toLowerCase() === '' ? rental : rental.name.toLowerCase().includes(search.toLowerCase())
                 }).map(rental => {
-                    return <Card key={rental.rentalId} rental={rental}  />
+                    return <Card key={rental.rentalId} rental={rental} />
 
                 })}
 
@@ -45,7 +44,7 @@ export function Rental() {
                     </div>
                 </Link>
             </div>
-            </div>
+        </div>
     );
 }
 

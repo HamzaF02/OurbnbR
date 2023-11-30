@@ -4,24 +4,24 @@ import './orders.css';
 import { parseDateTime, parseNumber, parsePrice } from '../../formating';
 import { Service } from "../Service"
 
+const api = new Service("order")
 
 export function Orders() {
     const [orders, setOrders] = useState();
     const [loading, setLoading] = useState(true)
-    const api = new Service ("order")
     
     // calls getOrders method
     useEffect(() => {
+        // gets all the orders from db 
+        async function getOrders() {
+            const data = await api.getAll()
+            setOrders(data);
+            setLoading(false);
+        }
         getOrders()
     }, []);
 
-    // gets all the orders from db 
-    async function getOrders() {
-        const data = await api.getAll()
-        setOrders(data);
-        setLoading(false);
-    }
-
+   
    
     
     

@@ -6,28 +6,28 @@ import './orders.css';
 import { Service } from "../Service"
 import { parseDateTime } from '../../formating';
 
-
+const api = new Service("order")
 export default function UpdateOrder() {
+    // sets values
+
     const [values, setValues] = useState(
         {
-        });
-
-    // sets values to get info from rental to be displayed to user 
-    const [rental, setRental] = useState(
-        {
-            rentalId: 0, name: "", from: "", to: "", rental: { owner: {} }, customer: {},
         });
     const [loading, setLoading] = useState(true)
     const [error,setError] = useState("")
     const params = useParams()
     const navigate = useNavigate()
-    const api = new Service("order")
   
    
 
     useEffect(() => {
+        async function getOrder() {
+            const data = await api.getObjByid(params.id)
+            console.log(data)
+            setValues(data); setLoading(false);
+        }
         getOrder()
-    }, []);
+    }, [params.id]);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -56,12 +56,6 @@ export default function UpdateOrder() {
         const name = e.target.name
         const value = e.target.value
         setValues({ ...values, [name]: value });
-    }
-
-    async function getOrder() {
-        const data = await api.getObjByid(params.id)
-        console.log(data)
-        setValues(data); setLoading(false);
     }
 
 

@@ -1,5 +1,4 @@
-﻿
-import { React } from 'react';
+﻿import { React } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import { Service } from "../Service"
 

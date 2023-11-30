@@ -1,12 +1,13 @@
 import { React, useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Inputs } from '../Input'
 import { inputlist } from './InputList';
 import "./neworder.css"
 import { parseDateTime } from '../../formating';
 import { Service } from '../Service';
 
-
+const api = new Service("order")
+const rentalapi = new Service("rentals")
 export function NewOrder() {
     const params = useParams();
 
@@ -27,30 +28,28 @@ export function NewOrder() {
     const [error,setError] = useState("")
 
     const navigate = useNavigate()
-    const api = new Service("order")
-    const rentalapi = new Service("rentals")
-    
+   
+    setValues({ ...values, rentalId: params.id });
     
 
     // calls the getrental method
     useEffect(() => {
+        async function getRental() {
+            if (params.id > 0) {
+                const data = await rentalapi.getObjByid(params.id);
+                setRental(data);
+                setLoading(false);
+            }
+
+            else {
+                setValidation("Invalid parameter")
+            }
+        }
         getRental()
-    }, []);
+    }, [params.id]);
 
     // method checks if rental has id bigger than 0 and gets data from getobjectfromid and get info 
-    async function getRental() {
-        if (params.id > 0) {
-            const data = await rentalapi.getObjByid(params.id);
-            setRental(data);
-            setLoading(false);
-            setValues({ ...values, rentalId: params.id });
-        }
-
-        else {
-            setValidation("Invalid parameter")
-        }
-
-    }
+    
 
     // method whem submiting data to database
     // we use a post method to create order
