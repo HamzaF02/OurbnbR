@@ -1,8 +1,10 @@
 
 export class Service {
+    //Constructor to initialize the base url 
     constructor(baseURL) {
         this.baseURL = "/api/"+baseURL;
     }
+    //Asynch function for creating a new object. MMakes a POST request to the server
     async create(obj) {
         const rep = await fetch(this.baseURL + '/create', {
             method: 'POST',
@@ -14,6 +16,7 @@ export class Service {
         const answer = await rep.json();
         return answer
     }
+    //Asynch function to update en object from the server with a PUT call.
 
     async update(obj) {
         const rep = await fetch(this.baseURL + '/update', {
@@ -26,6 +29,7 @@ export class Service {
         const answer = await rep.json();
         return answer
     }
+    //Asynch function to Delete en object from the server.
     async delete(id) {
         const rep = await fetch(this.baseURL + '/delete/' + id, {
             method: 'Delete',
@@ -37,7 +41,8 @@ export class Service {
 
         const answer = await rep.json();
         return answer
-    }
+
+    }//Asynch function to get all objects from the server (READ)
     async getAll() {
         const response = await fetch(this.baseURL);
         const data = await response.json()

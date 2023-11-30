@@ -49,7 +49,7 @@ export function Rental() {
     );
 }
 
-// Asynchronous function to fetch a list of rentals and parse the JSON response from the server
+// Asynchronous function to fetch a list of rentals from the server
 export async function getRentals() {
     const api = new Service("rentals")
     return await api.getAll()

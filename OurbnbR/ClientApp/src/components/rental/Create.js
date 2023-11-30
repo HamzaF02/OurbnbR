@@ -44,18 +44,21 @@ export function CreateRental() {
         );
     }
 
-
+//Function for creating a rental that woul get data from a request
+    // and a new instance of service to handle API calls
 export const rentalCreateAction = async ({request}) => {
     const data = await request.formData()
     const api = new Service("rentals")
+    //Getting values from the form
     const values = {
         name: data.get("name"), price: data.get("price"), description: data.get("description"), image: data.get("image"), location: data.get("location"), fromDate: data.get("fromDate"), toDate: data.get("toDate"), ownerId: data.get("ownerId"), owner: { }
     }
     console.log(values)
-   
+   //Date validation
     if (values.fromDate > values.toDate) {
         return { error: "Dates are not valid" }
     }
+    //Try to create rental from API, checking in correct or not and redirect to rental side
     try {
 
         const answer = await api.create(values)
@@ -65,7 +68,7 @@ export const rentalCreateAction = async ({request}) => {
         }
         console.log("Invalid");
         return { error: "Inncorrect information" }
-
+        //Error handling
     } catch (error) {
         console.log("Failed")
         return { error: error.message}
